@@ -3,45 +3,42 @@ import MenuBar from "../component/Menu";
 import FooterNote from "../component/Footer";
 
 const About = () => {
-  
   useEffect(() => {
     
     function fadeout() {
       document.querySelector('.preloader').style.opacity = '0';
       document.querySelector('.preloader').style.display = 'none';
   }
-  // eslint-disable-next-line no-undef
-    tns({
-      container: '.testimonial-slider',
-      items: 3,
-      slideBy: 'page',
-      autoplay: false,
-      mouseDrag: true,
-      gutter: 0,
-      nav: true,
-      controls: false,
-      responsive: {
-          0: {
-              items: 1,
-          },
-          540: {
-              items: 1,
-          },
-          768: {
-              items: 2,
-          },
-          992: {
-              items: 2,
-          },
-          1170: {
-              items: 3,
-          }
-      }
-  });
- 
     const timeoutID = window.setTimeout(fadeout,() => {
    }, 2000);
-
+// eslint-disable-next-line no-undef
+  tns({
+  container: '.testimonial-slider',
+  items: 3,
+  slideBy: 'page',
+  autoplay: false,
+  mouseDrag: true,
+  gutter: 0,
+  nav: true,
+  controls: false,
+  responsive: {
+      0: {
+          items: 1,
+      },
+      540: {
+          items: 1,
+      },
+      768: {
+          items: 2,
+      },
+      992: {
+          items: 2,
+      },
+      1170: {
+          items: 3,
+      }
+  }
+  });
     return () => window.clearTimeout(timeoutID );
 
 }, [])
@@ -90,66 +87,14 @@ const About = () => {
                   <h3>WE BUY, SELL VIRTUAL FUNDS AND UTILITY BILLS PAYMENT</h3>
                 </div>
                 <br/><br/>
-                    <p>
-                      Oza is a product of zictech technologies, birthed from an idea to provide a reliable solution of a wide range of digital assets, such as <b>Paypal, Payoneer and Bitcoin</b> as well as other digital transaction.
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
+                     Zictech Technologies Limited is a registered company with the CAC Act in Federal Republic of Nigeria and with The Financial Crime Commission (EFCC), this is to give you safety when dealing with us. <br/>
+                     Oza is a product of Zictech Technologies Limited and it was birthed from an idea to provide a reliable solution of a wide range of digital assets, such as <b>Paypal, Payoneer and Bitcoin</b> as well as other digital transaction.
                     </p>
               </div>
             </div>
           </div>
         </section>
-
-
-        {/* <section className="freatures section bg-white">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-6 col-12">
-                <div className="content">
-                  <h3 className="heading wow fadeInUp" data-wow-delay=".5s">
-                   Designed & built by the
-                    <br /> latest code integration
-                  </h3>
-
-                  <div className="single-feature wow fadeInUp" data-wow-delay=".6s">
-                    <div className="f-icon">
-                      <i className="lni lni-dashboard"></i>
-                    </div>
-                    <h4>Fast performance</h4>
-                    <p>
-                      Get your blood tests delivered at home collect a sample
-                      from the news your blood tests
-                    </p>
-                  </div>
-
-                  <div className="single-feature wow fadeInUp" data-wow-delay=".7s">
-                    <div className="f-icon">
-                      <i className="lni lni-pencil-alt"></i>
-                    </div>
-                    <h4>Prototyping</h4>
-                    <p>
-                      Get your blood tests delivered at home collect a sample
-                      from the news your blood tests
-                    </p>
-                  </div>
-
-                  <div
-                    className="single-feature wow fadeInUp"
-                    data-wow-delay="0.8s"
-                  >
-                    <div className="f-icon">
-                      <i className="lni lni-vector"></i>
-                    </div>
-                    <h4>Vector Editing</h4>
-                    <p>
-                      Get your blood tests delivered at home collect a sample
-                      from the news your blood tests
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> */}
-
 
         <section className="freatures section bg-white">
           <div className="container">
@@ -164,9 +109,9 @@ const About = () => {
                   <h3 className="heading wow fadeInUp" data-wow-delay=".5s">
                    Our Journey
                   </h3>
-                  <p>
-                      It began with a passion for pioneering changes in the digital economy world. We set out to redefine the landscape of earning actual value for your digital currency exchange, specializing in virtual funds and digital bills payment.<br/>
-The core of our mission is a commitment to providing seamless and secure virtual funds selling and buying experiences. We recognized the hard work remote workers <b>(freelances)</b> put in, in earning their virtual funds in a global community by working remotely online day-in day-out and aimed to bridge the gap by providing a platform that simplifies, reduce risk of losing your money to an unknown person(s) and the complexities of virtual funds exchanging.<br/>
+                  <p style={{fontSize: 20, textAlign:'justify'}}>
+                      It began with a passion for pioneering changes in the digital economy world. We set out to redefine the landscape of earning actual value for your digital currency exchange, specializing in virtual funds (<b>Paypal, Payoneer, Bitcoin</b>) and digital utility bills payment.<br/>
+The core of our mission is a commitment to providing seamless and secure virtual funds selling and buying experiences. We recognized the hard work remote workers <b>(freelances)</b> put in, in earning their virtual funds in a global community by working remotely online day-in day-out and aimed to bridge the gap by providing a platform that simplifies, reduce risk of losing money to an unknown person(s) and the complexities of virtual funds exchanging.<br/>
 From day one, our focus has been on creating a trustworthy platform where users can rely on, confidently sell their virtual funds, or pay bills with ease with their virtual funds. <br/>Our user-friendly interfaces, competitive rates, secure, and swift transactions delivery has positioned us as a reliable partner in the dynamic digital world.<br/>
 As we continue to grow, our journey is shaped by the relationships we build, the innovations we embrace, and the satisfaction of our users. Join us on this exciting journey as we pave the way for a new era in virtual currency earning, empowering individuals and youth across the globe <b>(African in particular)</b> to navigate the global digital economy by working remotely online with confidence, knowing they will earn actual value for their hard earned money."
 
@@ -186,13 +131,13 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                   <h3 className="heading wow fadeInUp" data-wow-delay=".5s">
                    Our Core Values
                   </h3>
-                  <p>At Oza, our values are the guiding principles that define who we are and how we operate. These values shape our culture, drive our decisions, and reflect our commitment to excellence. We are proud to stand by:
+                  <p style={{fontSize: 20, textAlign:'justify'}}> Our values are the guiding principles that define who we are and how we operate. These values shape our culture, drive our decisions, and reflect our commitment to excellence. We are proud to stand by:
                   </p>
                   <br/>
                   <div className="single-feature wow fadeInUp" data-wow-delay=".6s">
                     
                     <h4>Innovation</h4>
-                    <p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
                     Embracing change and fostering a culture of innovation, we constantly seek new ways to improve on our solution and stay up to date in the dynamic worlds of digital currency and exchanges.
                     </p>
                   </div>
@@ -200,21 +145,21 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                   <div className="single-feature wow fadeInUp" data-wow-delay=".7s">
                     
                     <h4>Credibility</h4>
-                    <p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
                     We understand that credibility is earned through consistent integrity, reliability, and a dedication to our users' trust. We stand firm in our commitment to providing a credible platform for all your virtual funds selling and buying.
                     </p>
                   </div>
 
                   <div className="single-feature wow fadeInUp" data-wow-delay="0.8s">
                     <h4>Integrity</h4>
-                    <p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
                     We prioritize transparency and honesty in all our interactions and services. Trust is the foundation of our relationships, and we uphold the highest ethical standards.
                     </p>
                   </div>
 
                   <div className="single-feature wow fadeInUp" data-wow-delay="0.8s">
                     <h4>Empowerment</h4>
-                    <p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
                     We believe in the power of a connected community. By fostering a supportive and inclusive environment, we aim to create a space where ideas flourish, individuals being financial empowered and relationships thrive.
                     </p>
                   </div>
@@ -222,7 +167,7 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                     <div className="single-feature wow fadeInUp" data-wow-delay="0.8s">
 
                     <h4>Reliability</h4>
-                    <p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
                     We strive for unwavering consistency in our services. We understand the importance of a reliable solution, from transaction processing to customer support, our users can rely on a consistent and dependable user experience each time they engage with our platform.
                     </p>
                   </div>
@@ -248,11 +193,11 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                   <h2 className="wow fadeInUp" data-wow-delay=".4s">
                     Our Team
                   </h2>
-                  <p className="wow fadeInUp" data-wow-delay=".6s">
+                  <p className="wow fadeInUp" data-wow-delay=".6s" style={{fontSize: 20, textAlign:'justify'}}>
                   our success is a collective effort driven by a dynamic and skilled team members. Each member contributes unique talents and expertise, working together to shape our vision and redefine the landscape of virtual sales and eliminating the risk of losing values for their money.
                   </p>
                 </div>
-                <p>Our passion meets expertise, and innovation merges with reliability. Together, we are committed to delivering a cutting-edge platform that empowers users in the realms of virtual funds and exchanges.</p>
+                <p style={{fontSize: 20, textAlign:'justify'}}>Our passion meets expertise, and innovation merges with reliability. Together, we are committed to delivering a cutting-edge platform that empowers users in the realms of virtual funds and exchanges.</p>
               </div>
             </div>
             {/* <div className="row">
@@ -423,7 +368,7 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                   <h2 className="wow fadeInUp" data-wow-delay=".4s">
                     Our Testimonials
                   </h2>
-                  <p className="wow fadeInUp" data-wow-delay=".6s">
+                  <p className="wow fadeInUp" data-wow-delay=".6s" style={{fontSize: 20, textAlign:'justify'}}>
                       What users are saying about our services
                   </p>
                 </div>
@@ -437,7 +382,7 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                       <i className="lni lni-quotation"></i>
                     </div>
                     <div className="text">
-                      <p>
+                      <p style={{fontSize: 20, textAlign:'justify'}}>
                         “Very impressive service delivery! they made my virtual funds sales a breeze. 
                   Fast transactions and with excellent rates I'm satisfied using the platform for my virtual funds
                   sales.”
@@ -463,7 +408,7 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                       <i className="lni lni-quotation"></i>
                     </div>
                     <div className="text">
-                      <p>
+                      <p style={{fontSize: 20, textAlign:'justify'}}>
                         “Top-notch service, it exceeded my expectations with 
                         their professionalism and commitment to user satisfaction. 
                         I sold my paypal funds on my own rates and I got my money within five minutes.”
@@ -489,7 +434,7 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                       <i className="lni lni-quotation"></i>
                     </div>
                     <div className="text">
-                      <p>
+                      <p style={{fontSize: 20, textAlign:'justify'}}>
                         “Provides a user-friendly experience and a competitive rates. 
                         Good customers support, reliability and swift transactions 
                         delivery make them stand out in the market. <br/>Give it a try.”
@@ -515,7 +460,7 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                       <i className="lni lni-quotation"></i>
                     </div>
                     <div className="text">
-                      <p>
+                      <p style={{fontSize: 20, textAlign:'justify'}}>
                         “Outstanding platform, consistently exceeds my expectations. 
                         I deal with them regularly and their dedication to excellence service, competitive rates makes them my go-to for seamless and reliable transactions..”
                       </p>
@@ -540,7 +485,7 @@ As we continue to grow, our journey is shaped by the relationships we build, the
                       <i className="lni lni-quotation"></i>
                     </div>
                     <div className="text">
-                      <p>
+                      <p style={{fontSize: 20, textAlign:'justify'}}>
                         “They offers unparalleled reliability and professionalism. 
                         Swift transactions, a high competitive rates and customer satisfaction set them apart.
                         I will continue using the platform”

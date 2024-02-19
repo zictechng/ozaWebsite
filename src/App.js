@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Home from './pages/Home';
-import About from './pages/About';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Services from './pages/Services';
-import Signup from './pages/Signup';
-import Contact from './pages/Contact';
-import UserPrivacyPolicy from './pages/PrivacyPolicy';
-import TermsCondition from './pages/TermsCondition';
-import VerifyAccount from './pages/verifyAccount';
-import ForgetPassword from './pages/ForgetPassword';
-import ResetPassword from './pages/ResetPassword';
+// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import client from './component/client';
+import RouterPage from './route/RouterPage';
 
 function App() {
   const [showLoader, setShowLoader] = useState(false);
@@ -23,7 +15,7 @@ function App() {
       })
       //console.log(res.data)
       if(res.data){
-        console.log(res.data)
+        //console.log(res.data)
         localStorage.setItem("CompanyName", JSON.stringify(res.data.app_name));
         localStorage.setItem("CompanyBaseUrl", JSON.stringify(res.data.app_baseurl));
         localStorage.setItem("CompanyShortInfo", JSON.stringify(res.data.app_short_name));
@@ -53,7 +45,8 @@ function App() {
 
   return (
     <div className="App">
-      <Router>
+      {/* This is traditional single way of routing... */}
+      {/* <Router>
         <Routes>
           <Route path='/' Component={Home}/>
           <Route path='/about-us' Component={About} />
@@ -66,9 +59,10 @@ function App() {
           <Route path='/forget-password' Component={ForgetPassword} />
           <Route path='/reset-password' Component={ResetPassword} />
         </Routes>
-      </Router>
-      {/* <About />
-       */}
+      </Router> */}
+
+      {/* Here we use functional/model way to organized our routing system in the application */}
+        <RouterPage />
     </div>
   );
 }

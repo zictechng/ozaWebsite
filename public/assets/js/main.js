@@ -7,9 +7,9 @@ Author: GrayGrids
     
     //===== Prealoder
 
-    window.onload = function () {
+    window.addEventListener('load', function () {
         window.setTimeout(fadeout, 500);
-    }
+    })
 
     function fadeout() {
         document.querySelector('.preloader').style.opacity = '0';

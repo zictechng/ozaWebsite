@@ -1,5 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable eqeqeq */
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom"
 
@@ -7,8 +8,6 @@ const MenuBar = () => {
   const location = useLocation();
 
   //console.log("Current Route: ", location.pathname);
-
-
 
   return (
     <Fragment>
@@ -28,8 +27,8 @@ const MenuBar = () => {
                       data-bs-target="#navbarSupportedContent"
                       aria-controls="navbarSupportedContent"
                       aria-expanded="false"
-                      aria-label="Toggle navigation"
-                    >
+                      aria-label="Toggle navigation">
+                        
                       <span className="toggler-icon"></span>
                       <span className="toggler-icon"></span>
                       <span className="toggler-icon"></span>
@@ -60,14 +59,14 @@ const MenuBar = () => {
                         <li className="nav-item">
                          <Link to="/contact-us" className={location.pathname =='/contact-us'? 'active': ''}>Contact Us</Link>
                         </li>
+                        
                       </ul>
                     </div>
                     <div className="button home-btn">
-                      {/* <a href="signup.html" className="btn">
-                        Open an account
-                      </a> */}
                       <Link to="/signup" className="btn">Open an account</Link>
+                     
                     </div>
+                    
                   </nav>
                 </div>
               </div>

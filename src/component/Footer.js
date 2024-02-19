@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-unused-vars */
 import React, { Fragment, useEffect, useState } from 'react';
@@ -139,8 +140,10 @@ const FooterNote = () => {
                         </li>
                       </ul>
                     </div>
+                   
                   </div>
-                  <div className="col-lg-2 col-md-6 col-12">
+                  
+                  <div className="col-lg-2 col-md-5 col-12">
                     <div className="single-footer f-link">
                       <h3>Company Info</h3>
                       <ul>
@@ -158,10 +161,13 @@ const FooterNote = () => {
                         <li>
                           <Link to={"/privacy-policy"}>Privacy Policy</Link>
                         </li>
+                        <li>
+                          <Link to={"/privacy-policy"}>Reg: <strong>95490549959</strong></Link>
+                        </li>
                       </ul>
                     </div>
                   </div>
-                  <div className="col-lg-2 col-md-6 col-12">
+                  <div className="col-lg-2 col-md-5 col-12">
                     <div className="single-footer f-link">
                       <h3>Support</h3>
                       <ul>
@@ -181,7 +187,7 @@ const FooterNote = () => {
                       </ul>
                     </div>
                   </div>
-                  <div className="col-lg-4 col-md-6 col-12">
+                  <div className="col-lg-4 col-md-5 col-12">
                     <div className="single-footer newsletter">
                       <h3>Get Instant Notification</h3>
                       <p>Subscribe to our newsletter for the latest updates, loan support, giveaways and more...</p>
@@ -210,12 +216,37 @@ const FooterNote = () => {
                         {" "}<i style={{color: '#fff', fontSize:14, cursor:'pointer'}} className="lni lni-close" onClick={() =>closeErrorShow()}></i> </p> </div> }
                         {/* <p style={{color: '#e32f45'}}>Error show here</p> */}
                       </form>
-                    </div>
+                     </div>
+                   </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <section className="call-action" style={{backgroundColor:'#081828'}}>
+          <div className="container">
+            <div className="inner-content-footer">
+              <div className="row">
+              <div className="col-lg-6 col-md-7 col-12">
+                  <div className="text">
+                  <h4 style={{color:'#fff'}}>
+                      Visit respective stores to download the app
+                  </h4>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-5 col-12">
+                  <div className="button">
+                    <a href="#" className="btn">
+                      <i className="lni lni-apple"></i> App Store
+                    </a>
+                    <a href="#" className="btn bg-white" style={{color:'#081828'}}>
+                      <i className="lni lni-play-store"></i> Google Play
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </section>
 
           <div className="copyright-area">
             <div className="container">

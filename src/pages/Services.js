@@ -64,7 +64,7 @@ const Services = () => {
                   <div className="single-feature wow fadeInUp" data-wow-delay=".6s">
                     
                     <h4>Buy Virtual Funds</h4>
-                    <p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
                         Experience trust and security on our platform. Easily purchase virtual funds at low rates through our seamless platform, enjoy fast transactions and fast deposit with confidence
                     </p>
                   </div>
@@ -72,7 +72,7 @@ const Services = () => {
                   <div className="single-feature wow fadeInUp" data-wow-delay=".7s">
                     
                     <h4>Sell Virtual Funds</h4>
-                    <p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
                     Sell your virtual funds at a favorable rate <b>(your own rate)</b> and have your bank account credited instantly. Say goodbye to failed or low rate transactions.<br/>
                     Your funds is your assets, stop wasting it on low rates.
                     </p>
@@ -81,17 +81,17 @@ const Services = () => {
                   <div
                     className="single-feature wow fadeInUp"
                     data-wow-delay="0.8s">
-                    <h4>Pay Bill With Virtual Funds</h4>
-                    <p>
+                    <h4>Pay utility Bills With Virtual Funds</h4>
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
                     You can now pay all your bills effortlessly using virtual funds. Streamline your payment process by utilizing digital currency for a convenient and efficient transaction
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-                  <p>
+                  <p style={{fontSize: 20, textAlign:'justify'}}>
                     You can now work online and earned in dollars, receive your money via <b>PayPal, Payoneer or Bitcoin</b> and sell them in high rates with us! No more hassle how to get value for your funds or sell your virtual funds, we got you covered.<br/>
-                    No more limitations to the extend of what you can earn, start remote job today and be rest assured you will get your value from your earning through our user-friendly, secured and competitive platform.
+                    No more limitations to the extend of what you can earn, start remote job today and be rest assured you will get your value from your earning through our user-friendly, secured and competitive rate system.
                   </p>
           </div>
         </section>
@@ -259,7 +259,7 @@ const Services = () => {
                   <h2 className="wow fadeInUp" data-wow-delay=".4s">
                     Our Services
                   </h2>
-                  <p className="wow fadeInUp" data-wow-delay=".6s">
+                  <p className="wow fadeInUp" data-wow-delay=".6s" style={{fontSize: 20, textAlign:'justify'}}>
                     We offer a competitive solution tailored to your needs and there is no limit to what you can expect in our solution because, we keep adding new exciting and useful features to our solution on a regular basis.
                   </p>
                 </div>
@@ -275,7 +275,7 @@ const Services = () => {
                     <i className="lni lni-grid-alt"></i>
                   </div>
                   <h4 className="text-title">Exchange Virtual Funds</h4>
-                  <p>
+                  <p style={{fontSize: 20, textAlign:'justify'}}>
                     Easily exchange your virtual funds to your local currency with a high competitive
                     rates and get your bank account credited within minutes.
                   </p>
@@ -290,9 +290,9 @@ const Services = () => {
                     <i className="lni lni-keyword-research"></i>
                   </div>
                   <h4 className="text-title">Request Paypal Account</h4>
-                  <p>
-                    We make it easier for you to receive funds via paypal accounts! Request a 
-                    <b> verified paypal account</b> and have your funds received.
+                  <p style={{fontSize: 20, textAlign:'justify'}}>
+                    We understand the pains of having a verified paypal account to receive funds. <br/>
+                    Request a <b> verified paypal account</b> and have your funds received.
                   </p>
                 </div>
               </div>
@@ -305,8 +305,8 @@ const Services = () => {
                     <i className="lni lni-vector"></i>
                   </div>
                   <h4 className="text-title">Connect With Users</h4>
-                  <p>
-                    You can easily send and receive funds from members users in the 
+                  <p style={{fontSize: 20, textAlign:'justify'}}>
+                    Connect with other users and you can easily send and receive funds from members users in the 
                     platform, it takes seconds to receive your funds.
                   </p>
                 </div>
@@ -319,8 +319,8 @@ const Services = () => {
                   <div className="main-icon">
                     <i className="lni lni-book"></i>
                   </div>
-                  <h4 className="text-title">Bills Payment</h4>
-                  <p>
+                  <h4 className="text-title">Utility Bills Payment</h4>
+                  <p style={{fontSize: 20, textAlign:'justify'}}>
                     It's easier, faster, convenient to do bill payment with virtual funds.
                     <b> Airtime, Mobile Data, Cable Subscriptions, Electricity and more...</b>
                   </p>
@@ -335,8 +335,8 @@ const Services = () => {
                     <i className="lni lni-cloud-network"></i>
                   </div>
                   <h4 className="text-title">Buy Virtual Funds</h4>
-                  <p>
-                    You can easily purchase virtual funds at a very low rate in our platform as a member user.
+                  <p style={{fontSize: 20, textAlign:'justify'}}>
+                    You can easily purchase virtual funds at a very low rate in our platform as a member user and hold or use for utility bills payment or any transaction.
                   </p>
                 </div>
               </div>
@@ -349,9 +349,9 @@ const Services = () => {
                     <i className="lni lni-display-alt"></i>
                   </div>
                   <h4 className="text-title">Loan Saver</h4>
-                  <p>
-                    We provide easy loan facility to our loan saver users! Take advantage of this
-                    to scale up your business. <Link to={'/contact-us'}> More details</Link>
+                  <p style={{fontSize: 20, textAlign:'justify'}}>
+                    We provide easy loan facility to our loan saver users!<br/>Take advantage of this
+                    to scale up your business, you don't need any paper work. <Link to={'/contact-us'}> More details</Link>
                   </p>
                 </div>
               </div>

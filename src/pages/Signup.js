@@ -315,8 +315,8 @@ const Signup = () => {
                             </label>
                             <input
                               className="form-control"
-                              type="text"
-                              placeholder="Referral Code (Optional)"
+                              type="number"
+                              placeholder="Ref Code (Optional)"
                               value={referralCode}
                               onChange={(e) => setReferralCode(e.target.value)}
                             />

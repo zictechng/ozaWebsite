@@ -150,13 +150,13 @@ const Contact = () => {
                 <div className="contact-widget-wrapper">
                   <div className="main-title">
                     <h2>Contact Us</h2>
-                    <p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}>
                       Our friendly technical and customer support team are available 24/7, feel free to reach out to us!  We will be glad to hear from you.
                     </p>
                   </div>
                   <div className="contact-widget-block">
                     <h3 className="title">Call us</h3>
-                    <p>+14-394-409-591</p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}> +44 738 964 6157</p>
                   </div>
                   <div className="contact-widget-block">
                     <h3 className="title">Technical Support</h3>
@@ -187,6 +187,7 @@ const Contact = () => {
                     <p>
                      
                     </p>
+                    {/* Contact form here */}
                     <form onSubmit={e => e.preventDefault()}
                     className="form">
                     <div className="row">
@@ -255,7 +256,8 @@ const Contact = () => {
             </div>
           </div>
         </div>
-
+          
+          {/* map here */}
         <div className="map-section">
           <div className="container">
             <div className="row">
@@ -279,7 +281,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        {/* <!-- Vertically centered modal --> */}
+        {/* confirm modal */}
         <Modal show={showModal} 
         onHide={closeModal}
         aria-labelledby="contained-modal-title-vcenter"
