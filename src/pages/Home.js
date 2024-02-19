@@ -3,8 +3,7 @@ import React, { Fragment, useEffect } from "react";
 import MenuBar from "../component/Menu";
 import FooterNote from "../component/Footer";
 import HeroSectionPage from "../component/HeroSection";
-import RouterPage from "../route/RouterPage";
-import { Navigate, useLocation, matchPath  } from 'react-router-dom';
+import { useLocation  } from 'react-router-dom';
 
 const Home = () => {
   const location = useLocation();
