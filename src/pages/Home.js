@@ -31,13 +31,13 @@ const Home = () => {
 
     window.addEventListener('load', function() {
         // eslint-disable-next-line no-undef
-        GLightbox({
-            'href': 'https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM',
-            'type': 'video',
-            'source': 'youtube', //vimeo, youtube or local
-            'width': 900,
-            'autoplayVideos': true,
-        });
+        // GLightbox({
+        //     'href': 'https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM',
+        //     'type': 'video',
+        //     'source': 'youtube', //vimeo, youtube or local
+        //     'width': 900,
+        //     'autoplayVideos': true,
+        // });
     });
 
   return (
@@ -207,12 +207,12 @@ const Home = () => {
                     
                     <div className="intro-video-play">
                       <div className="play-thumb wow zoomIn" data-wow-delay=".2s">
-                       <a
+                       {/* <a
                           href="https://www.youtube.com/watch?v=r44RKWyfcFw&amp;fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM"
                           className="glightbox video"
                         >
                           <i className="lni lni-play"></i>
-                        </a>
+                        </a> */}
                       </div>
                     </div>
                     <br/>

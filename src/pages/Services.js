@@ -51,7 +51,7 @@ const Services = () => {
             <div className="row align-items-center">
               <div className="col-lg-5 col-12">
                 <div className="image wow fadeInLeft" data-wow-delay=".3s">
-                  <img src="assets/images/features/feature-img.png" alt="#" />
+                  <img src="assets/images/features/feature-img4.png" alt="#" />
                 </div>
               </div>
               <div className="col-lg-7 col-12">

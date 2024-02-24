@@ -101,7 +101,7 @@ const About = () => {
             <div className="row align-items-center">
               <div className="col-lg-5 col-12">
                 <div className="image wow fadeInLeft" data-wow-delay=".3s">
-                  <img src="assets/images/features/feature-img.png" alt="#" />
+                  <img src="assets/images/features/feature-img2.png" alt="#" />
                 </div>
               </div>
               <div className="col-lg-7 col-12">
@@ -176,7 +176,7 @@ As we continue to grow, our journey is shaped by the relationships we build, the
               </div>
               <div className="col-lg-5 col-12">
                 <div className="image wow fadeInLeft" data-wow-delay=".3s">
-                  <img src="assets/images/features/feature-img.png" alt="#" />
+                  <img src="assets/images/features/feature-img3.png" alt="#" />
                 </div>
               </div>
             </div>
