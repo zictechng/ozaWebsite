@@ -32,7 +32,7 @@ const HeroSectionPage = () => {
                   
                   </div>
                   <div className="button">
-                  <a href="#" className="btn" target='_new'><i className="lni lni-apple"></i> App Store</a>
+                  {/* <a href="#" className="btn" target='_new'><i className="lni lni-apple"></i> App Store</a> */}
                   <a href="#" className="btn" target='_new' style={{backgroundColor:'#1D2667', color:'#fff'}}><i className="lni lni-play-store"></i> Google Play</a>
                   </div>
                 </div>

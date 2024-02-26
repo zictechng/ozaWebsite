@@ -539,9 +539,9 @@ const Home = () => {
                 </div>
                 <div className="col-lg-6 col-md-5 col-12">
                   <div className="button">
-                    <a href="#" className="btn">
+                    {/* <a href="#" className="btn">
                       <i className="lni lni-apple"></i> App Store
-                    </a>
+                    </a> */}
                     <a href="#" className="btn btn-alt">
                       <i className="lni lni-play-store"></i> Google Play
                     </a>
