@@ -11,6 +11,9 @@ import VerifyAccount from '../pages/verifyAccount';
 import ForgetPassword from '../pages/ForgetPassword';
 import ResetPassword from '../pages/ResetPassword';
 import Page404 from '../pages/404Page';
+import MobileTermCondition from '../pages/mobileTermCondition';
+import MobileAboutUs from '../pages/mobileAboutUs';
+import MobileUserPolicy from '../pages/mobileUsePolicy';
 
 export default function RouterPage() {
 
@@ -28,6 +31,9 @@ export default function RouterPage() {
                 <Route path="verify-account" Component={VerifyAccount} />
                 <Route path="forget-password" Component={ForgetPassword} />
                 <Route path="reset-password" Component={ResetPassword}/>
+                <Route path="mobiletc" Component={MobileTermCondition}/>
+                <Route path="mobile-about" Component={MobileAboutUs}/>
+                <Route path="mobileUserPolicy" Component={MobileUserPolicy}/>
                 {/* <Route path="/*" element={<Navigate to='/' replace/>} /> */}
                 {/* <Route path="*" element={<MissingRoute />} /> */}
                 <Route path="*" Component={Page404}/>

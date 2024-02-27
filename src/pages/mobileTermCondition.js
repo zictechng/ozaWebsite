@@ -1,0 +1,116 @@
+import React, { Fragment, useEffect, useState } from 'react';
+import FooterNote from '../component/Footer';
+import MenuBar from '../component/Menu';
+import Parser from 'html-react-parser';
+import Spinner from 'react-bootstrap/Spinner';
+import client from '../component/client';
+
+const MobileTermCondition = () => {
+
+  const [showLoader, setShowLoader] = useState(false);
+  const [privacyData, setPrivacyData] = useState('');
+
+  const termsConditionData = async() => {
+      
+    setShowLoader(true)
+    //console.log("Sending...", sendData)
+    try {
+      const res = await client.get(`/api/fetchAboutCompany`)
+      // eslint-disable-next-line eqeqeq
+      if(res.data.msg =='200'){
+        //console.log("data ", res.data.infoData.company_privacy_policy) 
+        setPrivacyData(res.data.infoData.company_term_conditions)
+          }
+        else if(res.data.status =='500'){
+          console.log("error ", res.data)  
+          }
+        } catch (error) {
+          console.log(error.message)
+        }
+        finally{
+          setShowLoader(false)
+          
+        }
+  }
+
+    useEffect(() => {
+      termsConditionData()
+        function fadeout() {
+            document.querySelector('.preloader').style.opacity = '0';
+            document.querySelector('.preloader').style.display = 'none';
+        }
+        const timeoutID = window.setTimeout(fadeout,() => {
+        }, 2000);
+     
+         return () => window.clearTimeout(timeoutID );
+    }, [])
+  return (
+    <>
+     <Fragment>
+     <div className="preloader">
+        <div className="preloader-inner">
+          <div className="preloader-icon">
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+        {/* <MenuBar /> */}
+
+        {/* <div className="breadcrumbs">
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-lg-6 offset-lg-3 col-md-12 col-12">
+                <div className="breadcrumbs-content">
+                  <h1 className="page-title">Terms and Conditions</h1>
+                  <ul className="breadcrumb-nav">
+                    <li>
+                      <a href="/">Home</a>
+                    </li>
+                    <li>Company Terms and conditions</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> */}
+
+        <div className="contact-us section">
+          <div className="container">
+            <div className="row">
+              <div className="col-lg-12 col-12">
+                <div className="contact-widget-wrapper">
+                  <div className="main-title">
+                    <h2>Terms and Conditions</h2>
+                      {showLoader ? 
+                      <div className='d-flex justify-content-center'>
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="large"
+                          role="status"
+                          color='#1D2667'
+                          aria-hidden="true"
+                         />
+                      </div>:
+                      <p style={{fontSize: 18, textAlign:'justify'}}>    
+                        {Parser(privacyData)}
+                      </p>
+                    }
+                    </div>
+                  
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+       
+        <FooterNote/>
+      </Fragment>
+    </>
+  );
+}
+
+export default MobileTermCondition;

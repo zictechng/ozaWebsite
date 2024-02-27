@@ -18,7 +18,7 @@ const UserPrivacyPolicy = () =>{
       const res = await client.get(`/api/fetchAboutCompany`)
       // eslint-disable-next-line eqeqeq
       if(res.data.msg =='200'){
-        console.log("data ", res.data.infoData.company_privacy_policy) 
+        //console.log("data ", res.data.infoData.company_privacy_policy) 
         setPrivacyData(res.data.infoData.company_privacy_policy)
           }
         else if(res.data.status =='500'){
