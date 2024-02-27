@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { Fragment, useEffect, useState } from 'react';
 import FooterNote from '../component/Footer';
 import MenuBar from '../component/Menu';
