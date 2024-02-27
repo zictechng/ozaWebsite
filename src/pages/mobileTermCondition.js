@@ -1,10 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import FooterNote from '../component/Footer';
-import MenuBar from '../component/Menu';
 import Parser from 'html-react-parser';
 import Spinner from 'react-bootstrap/Spinner';
 import client from '../component/client';
-import MobileMenuBar from '../component/mobileMenu';
+import MobileFooterNote from '../component/mobileFooter';
 
 const MobileTermCondition = () => {
 
@@ -88,9 +86,7 @@ const MobileTermCondition = () => {
             </div>
           </div>
         </div>
-        <a href="#" className="scroll-top">
-          <i className="lni lni-chevron-up"></i>
-        </a>
+        <MobileFooterNote />
       </Fragment>
     </>
   );

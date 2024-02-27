@@ -3,7 +3,7 @@ import FooterNote from '../component/Footer';
 import Parser from 'html-react-parser';
 import Spinner from 'react-bootstrap/Spinner';
 import client from '../component/client';
-import MobileMenuBar from '../component/mobileMenu';
+import MobileFooterNote from '../component/mobileFooter';
 
 const MobileAboutUs = () => {
 
@@ -55,8 +55,6 @@ const MobileAboutUs = () => {
           </div>
         </div>
       </div>
-        {/* <MenuBar /> */}
-        <MobileMenuBar />
         
         <div className="contact-us section">
           <div className="container">
@@ -88,6 +86,7 @@ const MobileAboutUs = () => {
             </div>
           </div>
         </div>
+        <MobileFooterNote />
       </Fragment>
     </>
   );
