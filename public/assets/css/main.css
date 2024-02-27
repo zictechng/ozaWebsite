@@ -5128,3 +5128,79 @@ blockquote span {
 .footer .copyright-area p a:hover {
   color: #1D2667;
 }
+
+/* css for whatsapp icon for desktop */
+.whatsapp_float {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  left: 40px;
+  background-color: #1D2667;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 1px 1px 2px #999;
+  z-index: 100;
+}
+
+.whatsapp-icon {
+  margin-top: 16px;
+}
+
+/* for mobile */
+@media screen and (max-width: 767px) {
+  .whatsapp-icon {
+      margin-top: 10px;
+  }
+
+  .whatsapp_float {
+      width: 40px;
+      height: 40px;
+      bottom: 20px;
+      left: 10px;
+      font-size: 22px;
+  }
+}
+
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #1D2667;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin:auto;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  position:fixed;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.white-screen {
+  position: relative;
+  }
+.loading-gif {
+  height: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+  }

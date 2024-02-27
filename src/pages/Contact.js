@@ -156,7 +156,10 @@ const Contact = () => {
                   </div>
                   <div className="contact-widget-block">
                     <h3 className="title">Call us</h3>
-                    <p style={{fontSize: 20, textAlign:'justify'}}> +44 738 964 6157</p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}> 
+                    <i className="lni lni-whatsapp"></i> +234 912 8091 031</p>
+                    <p style={{fontSize: 20, textAlign:'justify'}}> 
+                    <i className="lni lni-whatsapp"></i> +44 738 964 6157</p>
                   </div>
                   <div className="contact-widget-block">
                     <h3 className="title">Technical Support</h3>
@@ -264,7 +267,21 @@ const Contact = () => {
               <div className="col-12">
                 <div className="mapouter">
                   <div className="gmap_canvas">
-                    <iframe
+                  <iframe 
+                  title="contact_map"
+                  width="100%"
+                  height="500"
+                  id="gmap_canvas"
+                  src="https://maps.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.7649551438844!2d7.36824158169044!3d8.993762968580084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e73cb22c294f1%3A0xc9d3307b2865e722!2sSector%20F!5e0!3m2!1sen!2suk!4v1709034624123!5m2!1sen!2suk" 
+                  frameborder="0"
+                  scrolling="no"
+                  marginheight="0"
+                  marginwidth="0"
+                  allowfullscreen="" 
+                  loading="lazy">
+
+                  </iframe>
+                   {/* <iframe
                       title="contact_map"
                       width="100%"
                       height="500"
@@ -274,13 +291,14 @@ const Contact = () => {
                       scrolling="no"
                       marginheight="0"
                       marginwidth="0"
-                    ></iframe>
+                    ></iframe> */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         {/* confirm modal */}
         <Modal show={showModal} 
         onHide={closeModal}

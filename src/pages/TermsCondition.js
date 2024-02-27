@@ -1,10 +1,40 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import FooterNote from '../component/Footer';
 import MenuBar from '../component/Menu';
+import Parser from 'html-react-parser';
+import Spinner from 'react-bootstrap/Spinner';
+import client from '../component/client';
 
 const TermsCondition = () => {
 
+  const [showLoader, setShowLoader] = useState(false);
+  const [privacyData, setPrivacyData] = useState('');
+
+  const termsConditionData = async() => {
+      
+    setShowLoader(true)
+    //console.log("Sending...", sendData)
+    try {
+      const res = await client.get(`/api/fetchAboutCompany`)
+      // eslint-disable-next-line eqeqeq
+      if(res.data.msg =='200'){
+        //console.log("data ", res.data.infoData.company_privacy_policy) 
+        setPrivacyData(res.data.infoData.company_term_conditions)
+          }
+        else if(res.data.status =='500'){
+          console.log("error ", res.data)  
+          }
+        } catch (error) {
+          console.log(error.message)
+        }
+        finally{
+          setShowLoader(false)
+          
+        }
+  }
+
     useEffect(() => {
+      termsConditionData()
         function fadeout() {
             document.querySelector('.preloader').style.opacity = '0';
             document.querySelector('.preloader').style.display = 'none';
@@ -52,12 +82,22 @@ const TermsCondition = () => {
                 <div className="contact-widget-wrapper">
                   <div className="main-title">
                     <h2>Terms and Conditions</h2>
-                    <p>
-                    Welcome to Oza!<br/>
-                    Welcome! Thank you for visiting the Apex Exchange, a digital asset platform operated by and proprietary to Apex Web Network Limited, a company incorporated in Nigeria. You agree and understand that by signing up to the Apex Exchange and opening an account, you are agreeing to enter into this Terms of Use (the “Terms of Use”, “ToU”) by and between you and Apex Web Network Limited, and be legally bound by its terms and conditions, so please read them carefully. If any terms or conditions of this Terms of Use is unacceptable to you, please do not visit, access, or use the Apex platform. Use of the words “we,” “us,” “our” or “Apex” in this Terms of Use refers to Apex Web Network Limited and any or all of its affiliates.
-
-                    </p>
-                  </div>
+                      {showLoader ? 
+                      <div className='d-flex justify-content-center'>
+                        <Spinner
+                          as="span"
+                          animation="border"
+                          size="large"
+                          role="status"
+                          color='#1D2667'
+                          aria-hidden="true"
+                         />
+                      </div>:
+                      <p style={{fontSize: 18, textAlign:'justify'}}>    
+                        {Parser(privacyData)}
+                      </p>
+                    }
+                    </div>
                   
                 </div>
               </div>
