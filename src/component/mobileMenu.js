@@ -11,7 +11,7 @@ const MobileMenuBar = () => {
 
   return (
     <Fragment>
-        <header className="header navbar-area">
+        {/* <header className="header navbar-area">
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-12">
@@ -23,7 +23,7 @@ const MobileMenuBar = () => {
               </div>
             </div>
           </div>
-        </header>
+        </header> */}
     </Fragment>
   );
 }

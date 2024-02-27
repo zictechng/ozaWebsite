@@ -56,7 +56,7 @@ const MobileTermCondition = () => {
           </div>
         </div>
       </div>
-       <MobileMenuBar />
+       {/* <MobileMenuBar /> */}
 
         <div className="contact-us section">
           <div className="container">
