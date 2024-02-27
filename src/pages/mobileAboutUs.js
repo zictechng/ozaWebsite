@@ -3,6 +3,7 @@ import FooterNote from '../component/Footer';
 import Parser from 'html-react-parser';
 import Spinner from 'react-bootstrap/Spinner';
 import client from '../component/client';
+import MobileMenuBar from '../component/mobileMenu';
 
 const MobileAboutUs = () => {
 
@@ -55,25 +56,8 @@ const MobileAboutUs = () => {
         </div>
       </div>
         {/* <MenuBar /> */}
-
-        {/* <div className="breadcrumbs">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-6 offset-lg-3 col-md-12 col-12">
-                <div className="breadcrumbs-content">
-                  <h1 className="page-title">Terms and Conditions</h1>
-                  <ul className="breadcrumb-nav">
-                    <li>
-                      <a href="/">Home</a>
-                    </li>
-                    <li>Company Terms and conditions</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
+        <MobileMenuBar />
+        
         <div className="contact-us section">
           <div className="container">
             <div className="row">
@@ -104,9 +88,6 @@ const MobileAboutUs = () => {
             </div>
           </div>
         </div>
-
-       
-        <FooterNote/>
       </Fragment>
     </>
   );

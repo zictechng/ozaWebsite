@@ -1,15 +1,16 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useEffect, useState } from 'react';
-import FooterNote from '../component/Footer';
 import Parser from 'html-react-parser';
 import Spinner from 'react-bootstrap/Spinner';
 import client from '../component/client';
+import MobileMenuBar from '../component/mobileMenu';
 
 const MobileUserPolicy = () => {
 
   const [showLoader, setShowLoader] = useState(false);
   const [privacyData, setPrivacyData] = useState('');
 
-  const termsConditionData = async() => {
+  const userPolicyData = async() => {
       
     setShowLoader(true)
     //console.log("Sending...", sendData)
@@ -33,32 +34,31 @@ const MobileUserPolicy = () => {
   }
 
     useEffect(() => {
-      termsConditionData()
+      userPolicyData()
+      function fadeout() {
+        document.querySelector('.preloader').style.opacity = '0';
+        document.querySelector('.preloader').style.display = 'none';
+    }
+    const timeoutID = window.setTimeout(fadeout,() => {
+    }, 2000);
+ 
+     return () => window.clearTimeout(timeoutID );
         
     }, [])
   return (
     <>
      <Fragment>
     
-        {/* <MenuBar /> */}
-
-        {/* <div className="breadcrumbs">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-6 offset-lg-3 col-md-12 col-12">
-                <div className="breadcrumbs-content">
-                  <h1 className="page-title">Terms and Conditions</h1>
-                  <ul className="breadcrumb-nav">
-                    <li>
-                      <a href="/">Home</a>
-                    </li>
-                    <li>Company Terms and conditions</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+     <div className="preloader">
+        <div className="preloader-inner">
+          <div className="preloader-icon">
+            <span></span>
+            <span></span>
           </div>
-        </div> */}
+        </div>
+      </div>
+      <MobileMenuBar />
+        {/* <MenuBar /> */}
 
         <div className="contact-us section">
           <div className="container">
@@ -90,9 +90,9 @@ const MobileUserPolicy = () => {
             </div>
           </div>
         </div>
-
-       
-        <FooterNote/>
+        <a href="#" className="scroll-top">
+          <i className="lni lni-chevron-up"></i>
+        </a>
       </Fragment>
     </>
   );

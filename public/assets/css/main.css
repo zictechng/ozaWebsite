@@ -1688,6 +1688,24 @@ ol {
   }
 }
 
+
+
+.header .navbar-brand2 img {
+  width: 140px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .header .navbar-brand2 img {
+    width: 130px;
+  }
+}
+
+@media (max-width: 767px) {
+  .header .navbar-brand2 img {
+    width: 120px;
+  }
+}
+
 .header.sticky .button .btn {
   background-color: #5363CE;
   color: #fff;
