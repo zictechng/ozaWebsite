@@ -132,12 +132,11 @@ const FooterNote = () => {
                             <i className="lni lni-twitter-original"></i>
                           </Link>
                         </li>
-                        
-                        <li>
+                        {/* <li>
                           <Link href="#">
                             <i className="lni lni-youtube"></i>
                           </Link>
-                        </li>
+                        </li> */}
                       </ul>
                     </div>
                    
@@ -174,7 +173,7 @@ const FooterNote = () => {
                         <li>
                           {/* <a href="mail:hello@oza.com">Email</a> */}
                           <Link to='#'
-                          onClick={() => window.location = 'mailto:hello@oza.com'} >Email</Link>
+                          onClick={() => window.location = 'mailto:hello@ozaapp.com'} >Email</Link>
                         </li>
                         <li>
                           {/* <a href="javascript:void(0)">In-app Message</a> */}

@@ -165,7 +165,7 @@ const Contact = () => {
                     <h3 className="title">Technical Support</h3>
                     <p>
                     <Link to='#'
-                      onClick={() => window.location = 'mailto:support@oza.com'} >support@oza.com</Link>
+                      onClick={() => window.location = 'mailto:support@ozaapp.com'} >support@ozaapp.com</Link>
                     </p>
                     
                   </div>
@@ -173,7 +173,7 @@ const Contact = () => {
                     <h3 className="title">Sales Support</h3>
                     <p>
                     <Link to='#'
-                      onClick={() => window.location = 'mailto:hello@oza.com'} >hello@oza.com</Link>
+                      onClick={() => window.location = 'mailto:hello@ozaapp.com'} >hello@ozaapp.com</Link>
                     </p>
                     
                   </div>
