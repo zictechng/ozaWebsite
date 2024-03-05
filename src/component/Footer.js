@@ -161,7 +161,7 @@ const FooterNote = () => {
                           <Link to={"/privacy-policy"}>Privacy Policy</Link>
                         </li>
                         <li>
-                          <Link to={"/#"}>Reg: <strong>7046583</strong></Link>
+                          <Link to={"#"}>Reg: <strong>7046583</strong></Link>
                         </li>
                       </ul>
                     </div>
