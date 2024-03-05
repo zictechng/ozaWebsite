@@ -208,9 +208,9 @@ const ResetPassword = () => {
                 <form className="card login-form inner-content" onSubmit={e => e.preventDefault()}>
                   <div className="card-body">
                     <div className="title">
-                      <h3>Reset Password {state?.otpCode}</h3>
+                      <h3>Reset Password </h3>
                       <p>
-                        Need to reset your password? Choose new password details and enter the <b>OTP Code</b> sent to your email and click Reset Password button.
+                        Need to reset your password? Choose new password and enter the <b>OTP Code</b> sent to your email and click Reset Password button.
                       </p>
                     </div>
                     <div className="input-head">
