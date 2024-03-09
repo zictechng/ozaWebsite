@@ -118,15 +118,11 @@ const FooterNote = () => {
                       <h4 className="social-title">Follow Us On:</h4>
                       <ul className="social">
                         <li>
-                          <Link href="#">
+                          <Link href="https://www.facebook.com/ozaapp" target='_blank'>
                             <i className="lni lni-facebook-filled"></i>
                           </Link>
                         </li>
-                        <li>
-                          <Link href="#">
-                            <i className="lni lni-instagram"></i>
-                          </Link>
-                        </li>
+                        
                         <li>
                           <Link href="#">
                             <i className="lni lni-twitter-original"></i>
