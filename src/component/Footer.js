@@ -118,9 +118,9 @@ const FooterNote = () => {
                       <h4 className="social-title">Follow Us On:</h4>
                       <ul className="social">
                         <li>
-                          <Link href="https://www.facebook.com/ozaapp" target='_blank'>
+                          <a href="https://www.facebook.com/ozaapp/">
                             <i className="lni lni-facebook-filled"></i>
-                          </Link>
+                          </a>
                         </li>
                         
                         <li>
