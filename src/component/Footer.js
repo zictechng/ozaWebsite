@@ -272,12 +272,10 @@ const FooterNote = () => {
         <div className=''>
 
         </div>
-        <a
-        href="https://wa.me/447389646157?text=Welcome to Oza support center! How may we help you today?"
+        <a href="https://wa.me/447432490025?text=Welcome to Oza support center! How may we help you today?"
         className="whatsapp_float"
         target="_blank"
-        rel="noopener noreferrer"
-      >
+        rel="noopener noreferrer">
         <i className="fa fa-whatsapp whatsapp-icon"></i>
       </a>
         </Fragment>

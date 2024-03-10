@@ -159,7 +159,7 @@ const Contact = () => {
                     <p style={{fontSize: 20, textAlign:'justify'}}> 
                     <i className="lni lni-whatsapp"></i> +234 912 8091 031</p>
                     <p style={{fontSize: 20, textAlign:'justify'}}> 
-                    <i className="lni lni-whatsapp"></i> +44 738 964 6157</p>
+                    <i className="lni lni-whatsapp"></i> +44 743 2490 025</p>
                   </div>
                   <div className="contact-widget-block">
                     <h3 className="title">Technical Support</h3>
