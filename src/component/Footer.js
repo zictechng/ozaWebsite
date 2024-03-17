@@ -118,7 +118,7 @@ const FooterNote = () => {
                       <h4 className="social-title">Follow Us On:</h4>
                       <ul className="social">
                         <li>
-                          <a href="https://www.facebook.com/ozaapp/" target='_blank' rel='noreferrer'>
+                          <a href="https://www.facebook.com/ozaapp/" target="_new" rel="noreferrer">
                             <i className="lni lni-facebook-filled"></i>
                           </a>
                         </li>
@@ -233,7 +233,8 @@ const FooterNote = () => {
                     {/* <a href="#" className="btn">
                       <i className="lni lni-apple"></i> App Store
                     </a> */}
-                    <a href="#" className="btn bg-white" style={{color:'#081828'}}>
+                    <a href="https://play.google.com/store/apps/details?id=com.zictech.ozaapp" className="btn bg-white" style={{color:'#081828'}}
+                    target="_new" rel="noreferrer">
                       <i className="lni lni-play-store"></i> Google Play
                     </a>
                   </div>
@@ -255,7 +256,7 @@ const FooterNote = () => {
                   <div className="col-lg-6 col-md-6 col-12">
                     <p className="copyright-owner">
                       A product by{" "}
-                      <a href="https://zictech-ng.com/">
+                      <a href="https://zictech-ng.com/" target="_new" rel="noreferrer">
                         Zictech Technologies Limited
                       </a>
                     </p>

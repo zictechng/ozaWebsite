@@ -542,7 +542,7 @@ const Home = () => {
                     {/* <a href="#" className="btn">
                       <i className="lni lni-apple"></i> App Store
                     </a> */}
-                    <a href="#" className="btn btn-alt">
+                    <a href="https://play.google.com/store/apps/details?id=com.zictech.ozaapp" target="_new" className="btn btn-alt">
                       <i className="lni lni-play-store"></i> Google Play
                     </a>
                   </div>
