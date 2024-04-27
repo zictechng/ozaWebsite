@@ -19,6 +19,7 @@ const Signup = () => {
 
   const [fullName, setFullName] = useState("");
   const [userPhone, setUserPhone] = useState("");
+  const [phoneCode, setPhoneCode] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [referralCode, setReferralCode] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -50,6 +51,19 @@ const Signup = () => {
         });
         return
       }
+      else if (phoneCode == '') {
+        toast.error('Phone country code required! Ex:(+234)', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          });
+          return
+        }
       else if(fullName !== '' && userPhone !== '' && userEmail !== '' && userPassword !== ''){
         setShowModal(true);
         }
@@ -61,7 +75,7 @@ const Signup = () => {
       const sendData ={
         "display_name": fullName,
         "email": userEmail,
-        "phone": userPhone,
+        "phone": phoneCode+userPhone,
         "password": userPassword,
         "share_code": referralCode,
         "confirm_password": userConfirmPassword,
@@ -85,7 +99,7 @@ const Signup = () => {
           }
        
         if(!IsValidPhoneNumber(userPhone)){
-          toast.error("Phone number not more than 10 digits",
+          toast.error("Phone number not more than 11 digits",
           {
             position: "top-right",
             autoClose: 3000,
@@ -245,9 +259,9 @@ const Signup = () => {
                       <span className="small-title">
                         Download the app from app store
                       </span>
-                      <a href="#" className="option-button btn">
+                      <a href="https://play.google.com/store/apps/details?id=com.zictech.ozaapp" className="option-button btn">
                         
-                        Download
+                        Download Mobile App
                       </a>
                     </div>
                     <div className="or">
@@ -259,8 +273,7 @@ const Signup = () => {
                     </div>
                     
                     <div className="input-head">
-                      <div className="row">
-                        <div className="col-lg-6 col-12">
+                        <div className="col-lg-12 col-12">
                           <div className="form-group input-group">
                             <label>
                               <i className="lni lni-user"></i>
@@ -275,6 +288,8 @@ const Signup = () => {
                             />
                           </div>
                         </div>
+                      <div className="row">
+                        
                         <div className="col-lg-6 col-12">
                           <div className="form-group input-group">
                             <label>
@@ -290,9 +305,39 @@ const Signup = () => {
                             />
                           </div>
                         </div>
+                        <div className="col-lg-6 col-12">
+                          <div className="form-group input-group">
+                              <label>
+                                <i className="lni lni-code"></i>
+                              </label>
+                              <input
+                                className="form-control"
+                                type="number"
+                                placeholder="Ref Code (Optional)"
+                                value={referralCode}
+                                onChange={(e) => setReferralCode(e.target.value)}
+                              />
+                            </div>
+                        </div>
                       </div>
 
                       <div className="row">
+                        <div className="col-lg-6 col-12">
+                          <div className="form-group input-group">
+                            <label>
+                              <i className="lni lni-code"></i>
+                            </label>
+                            <input
+                              className="form-control"
+                              type="text"
+                              placeholder="Phone Code (+234)"
+                              maxLength={5}
+                              value={phoneCode}
+                              required="required"
+                              onChange={(e) => setPhoneCode(e.target.value)}
+                            />
+                          </div>
+                        </div>
                         <div className="col-lg-6 col-12">
                           <div className="form-group input-group">
                             <label>
@@ -308,21 +353,9 @@ const Signup = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-lg-6 col-12">
-                          <div className="form-group input-group">
-                            <label>
-                              <i className="lni lni-code"></i>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="number"
-                              placeholder="Ref Code (Optional)"
-                              value={referralCode}
-                              onChange={(e) => setReferralCode(e.target.value)}
-                            />
-                          </div>
-                        </div>
+                        
                       </div>
+
                       <div className="form-group input-group">
                         <label>
                           <i className="lni lni-lock-alt"></i>
@@ -336,6 +369,7 @@ const Signup = () => {
                           onChange={(e) => setUserPassword(e.target.value)}
                         />
                       </div>
+
                       <div className="form-group input-group">
                         <label>
                           <i className="lni lni-lock-alt"></i>

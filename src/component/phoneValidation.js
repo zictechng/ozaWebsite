@@ -2,6 +2,6 @@
  
 export default function IsValidPhoneNumber(data) {
     // Regular expression pattern for validating phone number
-    const phonePattern = /^\d{10}$/;
+    const phonePattern = /^\d{11}$/;
     return phonePattern.test(data);
 };

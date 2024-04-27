@@ -15,7 +15,7 @@ import client from '../component/client';
 const VerifyAccount = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-
+  
   if(state?.userEmailId === null || state?.userEmailId === '' || state?.userEmailId === undefined){
     navigate('/signup');
   }
@@ -147,6 +147,7 @@ const VerifyAccount = () => {
             }
         }
 
+        
   useEffect(() => {
     if(state?.userEmailId === null || state?.userEmailId === '' || state?.userEmailId === undefined){
       navigate('/signup');
@@ -259,7 +260,17 @@ const VerifyAccount = () => {
           <Modal.Header>
           <Modal.Title>Account Verified</Modal.Title>
         </Modal.Header>
-            <Modal.Body style={{ fontSize: 20 }}>Please, download the mobile app from the respective app stores to continue and start to enjoy the amazing offer we have for you! <br/>Thank you.
+            <Modal.Body style={{ fontSize: 18 }}>
+              Your account has been verified successfully.<br/>
+              Please, download the mobile app from the app stores to continue<br/>
+              <div className="row col-xs-3">
+              <div className="btn">
+                  {/* <a href="#" className="btn me-1" style={{backgroundColor:'#595F90', color:'#fff'}}><i className="lni lni-apple"></i> App Store</a> */}
+                  <a href="https://play.google.com/store/apps/details?id=com.zictech.ozaapp" className="btn" style={{backgroundColor:'#1D2667', color:'#fff'}}><i className="lni lni-play-store"></i> Google Play</a><br/>
+                  </div>
+              </div>
+              After download, login with your registered details and start to enjoy the amazing offer we have for you. <br/>
+              Thank you.
               </Modal.Body>
                 <Modal.Footer>
                 {/* <Button variant="secondary" onClick={closeModal}>
