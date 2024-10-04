@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable eqeqeq */
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom"

@@ -259,7 +259,7 @@ const Signup = () => {
                       <span className="small-title">
                         Download the app from app store
                       </span>
-                      <a href="https://play.google.com/store/apps/details?id=com.zictech.ozaapp" className="option-button btn">
+                      <a href="https://play.google.com/store/apps/details?id=com.ozaapp.mobile" className="option-button btn">
                         
                         Download Mobile App
                       </a>
@@ -269,7 +269,7 @@ const Signup = () => {
                       
                     </div>
                     <div className="title">
-                     <p>Create a free account to join the platform</p>
+                     <p>Create a free account to get started</p>
                     </div>
                     
                     <div className="input-head">
@@ -329,7 +329,7 @@ const Signup = () => {
                             </label>
                             <input
                               className="form-control"
-                              type="text"
+                              type="numeric"
                               placeholder="Phone Code (+234)"
                               maxLength={5}
                               value={phoneCode}
@@ -409,7 +409,7 @@ const Signup = () => {
           <Modal.Header>
           <Modal.Title>Attention!</Modal.Title>
         </Modal.Header>
-          <Modal.Body><p>By signup, you agree to the company terms and conditions.</p></Modal.Body>
+          <Modal.Body><p>By signup, you agree to the users use and policy of the company.</p></Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={closeModal} disabled={showLoader}>
                 Close

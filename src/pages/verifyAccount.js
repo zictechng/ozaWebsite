@@ -203,7 +203,7 @@ const VerifyAccount = () => {
                   <div className="card-body">
                     <div className="title">
                       <h3>Verify your account</h3>
-                      <p>We sent verification code <b>OTP Code</b> to your registered email address. It might take sometime to arrival, ensure to check spam box.</p>
+                      <p>We sent verification code <b>OTP Code</b> to your registered email address. It might take sometime to arrival, ensure to check your spam box.</p>
                     </div>
                     
                     <div className="or">
@@ -266,7 +266,7 @@ const VerifyAccount = () => {
               <div className="row col-xs-3">
               <div className="btn">
                   {/* <a href="#" className="btn me-1" style={{backgroundColor:'#595F90', color:'#fff'}}><i className="lni lni-apple"></i> App Store</a> */}
-                  <a href="https://play.google.com/store/apps/details?id=com.zictech.ozaapp" className="btn" style={{backgroundColor:'#1D2667', color:'#fff'}}><i className="lni lni-play-store"></i> Google Play</a><br/>
+                  <a href="https://play.google.com/store/apps/details?id=com.ozaapp.mobile" className="btn" style={{backgroundColor:'#1D2667', color:'#fff'}}><i className="lni lni-play-store"></i> Google Play</a><br/>
                   </div>
               </div>
               After download, login with your registered details and start to enjoy the amazing offer we have for you. <br/>
