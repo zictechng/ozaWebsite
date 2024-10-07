@@ -13,13 +13,15 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import IsValidEmail from "../component/EmailValidation";
 import IsValidPhoneNumber from "../component/phoneValidation";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+
 
 const Signup = () => {
   const navigate = useNavigate();
 
   const [fullName, setFullName] = useState("");
   const [userPhone, setUserPhone] = useState("");
-  const [phoneCode, setPhoneCode] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [referralCode, setReferralCode] = useState("");
   const [userPassword, setUserPassword] = useState("");
@@ -27,12 +29,29 @@ const Signup = () => {
   const [showLoader, setShowLoader] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  const [phone, setPhone] = useState('');
+  const [country, setCountry] = useState({});
+
+  const handleOnChange = (value, countryData) => {
+    setPhone(value);
+    setCountry(countryData); // Selected country data
+  };
+
 
   // function to close the modal
   const closeModal = () => {
     setShowModal(false);
     setShowLoader(false) 
   }
+
+  const handlePhoneFieldChange = (e) => {
+    const value = e.target.value;
+
+    // Allow only numbers and limit input to 11 digits
+    if (value === '' || (/^\d+$/.test(value) && value.length <= 11)) {
+      setUserPhone(value);
+    }
+  };
 
   // function to confirm if user filled the from correctly
   // submit contact form here by checking details
@@ -51,8 +70,8 @@ const Signup = () => {
         });
         return
       }
-      else if (phoneCode == '') {
-        toast.error('Phone country code required! Ex:(+234)', {
+      else if (phone == '') {
+        toast.error('Please select country and try again', {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: true,
@@ -75,10 +94,11 @@ const Signup = () => {
       const sendData ={
         "display_name": fullName,
         "email": userEmail,
-        "phone": phoneCode+userPhone,
+        "phone": "+"+ phone + userPhone,
         "password": userPassword,
         "share_code": referralCode,
         "confirm_password": userConfirmPassword,
+        "user_country": country.name,
       }
         if(!IsValidEmail(userEmail)){
         toast.error("Please enter a valid email",
@@ -134,7 +154,7 @@ const Signup = () => {
             return
           }
 
-      //console.log("Sending...", sendData)
+      console.log("Sending...", sendData)
       try {
         const res = await client.post(`/api/register`, sendData, {
         })
@@ -322,21 +342,17 @@ const Signup = () => {
                       </div>
 
                       <div className="row">
+                      <label>Select Country</label>
                         <div className="col-lg-6 col-12">
-                          <div className="form-group input-group">
-                            <label>
-                              <i className="lni lni-code"></i>
-                            </label>
-                            <input
-                              className="form-control"
-                              type="numeric"
-                              placeholder="Phone Code (+234)"
-                              maxLength={5}
-                              value={phoneCode}
-                              required="required"
-                              onChange={(e) => setPhoneCode(e.target.value)}
-                            />
-                          </div>
+                        <div className="form-group input-group">
+                        <PhoneInput
+                          country={'us'} // Default country
+                          value={phone}
+                          onChange={handleOnChange}
+                          enableSearch={true}
+                          placeholder="Country Name"
+                        />
+                        </div>
                         </div>
                         <div className="col-lg-6 col-12">
                           <div className="form-group input-group">
@@ -347,12 +363,35 @@ const Signup = () => {
                               className="form-control"
                               type="text"
                               placeholder="Phone Number"
+                              maxLength={11}
                               value={userPhone}
                               required="required"
-                              onChange={(e) => setUserPhone(e.target.value)}
+                              onChange={handlePhoneFieldChange}
                             />
                           </div>
                         </div>
+                        
+                      </div>
+
+                      <div className="row">
+                          {/* <input
+                              className="form-control"
+                              type="text"
+                              placeholder="Phone Code (+234)"
+                              maxLength={5}
+                              value={country.dialCode? country.dialCode: phoneCode}
+                              required="required"
+                              onChange={(e) => setPhoneCode(e.target.value)}
+                            /> */}
+                          {country && country.name && (
+                          <div className="col-lg-6 col-12">
+                            <div className="form-group input-group">
+                            <p> {country.name}</p>
+                            {/* <p><strong>Country Code:</strong> +{country.dialCode}</p>
+                            <p><strong>ISO2 Code:</strong> {country.countryCode}</p> */}
+                            </div>
+                          </div>
+                          )}
                         
                       </div>
 
@@ -409,7 +448,7 @@ const Signup = () => {
           <Modal.Header>
           <Modal.Title>Attention!</Modal.Title>
         </Modal.Header>
-          <Modal.Body><p>By signup, you agree to the users use and policy of the company.</p></Modal.Body>
+          <Modal.Body><p>By signup, you agree to the users policy of the company.</p></Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={closeModal} disabled={showLoader}>
                 Close
