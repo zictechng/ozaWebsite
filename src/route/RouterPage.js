@@ -14,6 +14,7 @@ import Page404 from '../pages/404Page';
 import MobileTermCondition from '../pages/mobileTermCondition';
 import MobileAboutUs from '../pages/mobileAboutUs';
 import MobileUserPolicy from '../pages/mobileUsePolicy';
+import Login from '../pages/Login';
 
 export default function RouterPage() {
 
@@ -25,6 +26,7 @@ export default function RouterPage() {
                 <Route path="about-us" Component={About} />
                 <Route path="services" Component={Services} />
                 <Route path="signup" Component={Signup} />
+                <Route path="login" Component={Login}/>
                 <Route path="contact-us" Component={Contact} />
                 <Route path="privacy-policy" Component={UserPrivacyPolicy} />
                 <Route path="terms-and-conditions" Component={TermsCondition} />
@@ -34,6 +36,7 @@ export default function RouterPage() {
                 <Route path="mobiletc" Component={MobileTermCondition}/>
                 <Route path="mobile-about" Component={MobileAboutUs}/>
                 <Route path="mobileUserPolicy" Component={MobileUserPolicy}/>
+                
                 {/* <Route path="/*" element={<Navigate to='/' replace/>} /> */}
                 {/* <Route path="*" element={<MissingRoute />} /> */}
                 <Route path="*" Component={Page404}/>

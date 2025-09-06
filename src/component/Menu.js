@@ -60,13 +60,22 @@ const location = useLocation();
                         
                       </ul>
                     </div>
+                    <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: "20px",      // space between buttons
+                      marginTop: "20px" // optional spacing from elements above
+                    }}
+                  >
                     <div className="button home-btn">
-                      <Link to="/signup" className="btn">Login</Link>
+                      <Link to="/login" className="btn">Login</Link>
                      
                     </div>
                     <div className="button home-btn">
                       <Link to="/signup" className="btn">Open an account</Link>
                      
+                    </div>
                     </div>
                     
                   </nav>
