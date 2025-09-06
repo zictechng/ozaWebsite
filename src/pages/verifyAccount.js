@@ -76,11 +76,7 @@ const VerifyAccount = () => {
         const res = await client.post(`/api/otp_verify`, sendData, {
         })
         if(res.data.msg ==='200'){
-<<<<<<< HEAD
-          toast.success('Account Activated successfully! Download the app to and enjoy more features or access your account through the web.',
-=======
-          toast.success('Account Activated successfully! Download the app to continue',
->>>>>>> origin/main
+toast.success('Account Activated successfully! Download the app to continue',
               {
                 position: "top-right",
                 autoClose: 6000,
