@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { useLocation } from "react-router-dom"
 
 const MenuBar = () => {
+<<<<<<< HEAD
 const location = useLocation();
+=======
+  const location = useLocation();
+>>>>>>> origin/main
 
   //console.log("Current Route: ", location.pathname);
 
