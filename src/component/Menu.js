@@ -65,6 +65,10 @@ const location = useLocation();
                       </ul>
                     </div>
                     <div className="button home-btn">
+                      <Link to="/signup" className="btn">Login</Link>
+                     
+                    </div>
+                    <div className="button home-btn">
                       <Link to="/signup" className="btn">Open an account</Link>
                      
                     </div>
