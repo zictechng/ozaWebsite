@@ -52,7 +52,10 @@ Author: GrayGrids
     };
 
     // WOW active
-    new WOW().init();
+   if (typeof WOW !== 'undefined') {
+      // eslint-disable-next-line no-undef
+      new WOW().init();
+    }
 
     //===== mobile-menu-btn
     let navbarToggler = document.querySelector(".mobile-menu-btn");
