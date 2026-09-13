@@ -35,9 +35,11 @@ const Login = () => {
         password: userPassword,
       });
       if (res.data.msg === '200') {
-        setShowModal(true);
+        // Store auth data so user portal can read it
+        localStorage.setItem('authUserData', JSON.stringify(res.data));
         setUserEmail('');
         setUserPassword('');
+        setShowModal(true);
       } else {
         toast.error(res.data.message || 'Login failed. Please try again.');
       }
@@ -285,7 +287,7 @@ const Login = () => {
         </Modal.Body>
         <Modal.Footer style={{ border: 'none', justifyContent: 'center', paddingBottom: '28px', gap: '12px', flexDirection: 'column', padding: '16px 32px 28px' }}>
           {/* Primary — Web Portal */}
-          <a href="http://localhost:3000/auth/sign-in"
+          <a href="http://localhost:3000"
             style={{
               display: 'block', width: '100%', textAlign: 'center',
               background: '#4C5FD5', color: '#fff', borderRadius: '10px',
