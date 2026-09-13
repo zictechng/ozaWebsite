@@ -19,6 +19,7 @@ const Login = () => {
   const [showModal, setShowModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [ssoToken, setSsoToken] = useState('');
+  const [loginPayload, setLoginPayload] = useState(null);
 
   const processLogin = async () => {
     if (!userEmail || !userPassword) {
@@ -36,8 +37,7 @@ const Login = () => {
         password: userPassword,
       });
       if (res.data.msg === '200') {
-        const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(res.data))));
-        setSsoToken(encoded);
+        setLoginPayload(res.data);
 
         setUserEmail('');
         setUserPassword('');
@@ -289,14 +289,29 @@ const Login = () => {
         </Modal.Body>
         <Modal.Footer style={{ border: 'none', justifyContent: 'center', paddingBottom: '28px', gap: '12px', flexDirection: 'column', padding: '16px 32px 28px' }}>
           {/* Primary — Web Portal */}
-          <a href={`${process.env.REACT_APP_PORTAL_URL || 'http://localhost:3000'}/?sso=${ssoToken}`}
+          <button
+            onClick={() => {
+                const portalUrl = process.env.REACT_APP_PORTAL_URL || 'http://localhost:3000';
+                const win = window.open(`${portalUrl}/auth/sign-in?sso=pending`, '_blank');
+
+                const send = setInterval(() => {
+                  if (win.closed) { clearInterval(send); return; }
+                  win.postMessage({ type: 'SSO_LOGIN', payload: loginPayload }, portalUrl);
+                }, 100);
+
+                setTimeout(() => clearInterval(send), 5000);
+
+                // ✅ Close modal immediately
+                setShowModal(false);
+              }}
             style={{
               display: 'block', width: '100%', textAlign: 'center',
               background: '#4C5FD5', color: '#fff', borderRadius: '10px',
               padding: '13px', fontWeight: 700, fontSize: '15px',
-              textDecoration: 'none',
-            }}> 🌐 Open Web Dashboard
-          </a>
+              border: 'none', cursor: 'pointer',
+            }}>
+            🌐 Open Web Dashboard
+          </button>
           {/* Secondary — App */}
           <a href="/#" style={{
             display: 'block', width: '100%', textAlign: 'center',

@@ -52,7 +52,7 @@ const Signup = () => {
   };
 
   const submitRegForm = () => {
-    if (!userPhone || !userPassword || !userConfirmPassword) {
+    if (!phone || !userPassword || !userConfirmPassword) {
       toast.error('All fields are required');
       return;
     }
@@ -73,7 +73,7 @@ const Signup = () => {
       const sendData = {
         display_name: fullName,
         email: userEmail,
-        phone: '+' + phone + userPhone,
+        phone: '+' + phone,
         password: userPassword,
         share_code: referralCode,
         confirm_password: userConfirmPassword,
@@ -263,17 +263,34 @@ const Signup = () => {
                   <PhoneInput
                     country={'ng'}
                     value={phone}
-                    onChange={handleOnChange}
-                    inputStyle={{ display: 'none' }}
-                    containerStyle={{ width: 'auto', marginBottom: '8px' }}
-                    buttonStyle={{
-                      border: '1.5px solid #e2e8f0', borderRadius: '10px',
-                      background: '#fff', padding: '0 12px',
+                    onChange={(value, countryData) => {
+                      setPhone(value);
+                      setCountry(countryData);
                     }}
+                    inputStyle={{
+                      width: '100%',
+                      padding: '13px 16px 13px 48px',
+                      border: '1.5px solid #e2e8f0',
+                      borderRadius: '10px',
+                      fontSize: '15px',
+                      color: '#1A1F36',
+                      background: '#fff',
+                      fontFamily: 'inherit',
+                      height: 'auto',
+                    }}
+                    buttonStyle={{
+                      border: '1.5px solid #e2e8f0',
+                      borderRight: 'none',
+                      borderRadius: '10px 0 0 10px',
+                      background: '#fff',
+                      padding: '0 8px',
+                    }}
+                    containerStyle={{ width: '100%' }}
+                    dropdownStyle={{ borderRadius: '10px', fontSize: '14px' }}
+                    placeholder="Phone number"
+                    enableSearch
+                    searchPlaceholder="Search country..."
                   />
-                  <input type="tel" placeholder="Phone number (e.g. 08012345678)"
-                    value={userPhone} onChange={handlePhoneFieldChange}
-                    style={{ ...inputStyle, paddingLeft: '16px' }} />
                 </div>
 
                 {/* Referral */}
@@ -298,14 +315,7 @@ const Signup = () => {
             {/* ── STEP 2 ── */}
             {step === 2 && (
               <>
-                {/* Phone number local */}
-                <div style={{ marginBottom: '18px' }}>
-                  <label style={labelStyle}>Local phone number</label>
-                  <input type="tel" placeholder="e.g. 08012345678"
-                    value={userPhone} onChange={handlePhoneFieldChange}
-                    style={{ ...inputStyle, paddingLeft: '16px' }} />
-                </div>
-
+                
                 {/* Password */}
                 <div style={{ marginBottom: '18px' }}>
                   <label style={labelStyle}>Password</label>
@@ -375,8 +385,10 @@ const Signup = () => {
           {[
             { label: 'Full Name', value: fullName },
             { label: 'Email', value: userEmail },
-            { label: 'Country', value: country?.name || '—' },
-          ].map((d, i) => (
+            { label: 'Phone', value: phone ? `+${phone}` : '—' },
+            { label: 'Country', value: country?.name || country?.countryName || '—' },
+              referralCode ? { label: 'Referral Code', value: referralCode } : null,
+            ].filter(Boolean).map((d, i) => (
             <div key={i} style={{
               display: 'flex', justifyContent: 'space-between',
               padding: '10px 0', borderBottom: '1px solid #f1f5f9',

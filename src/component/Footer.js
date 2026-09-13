@@ -120,7 +120,7 @@ const FooterNote = () => {
                     { icon: 'f', href: '#' },
                     { icon: '𝕏', href: '#' },
                     { icon: 'in', href: '#' },
-                    { icon: '📸', href: '#' },
+                    
                   ].map((s, i) => (
                     <a key={i} href={s.href} target="_blank" rel="noreferrer" style={{
                       width: '36px', height: '36px', borderRadius: '8px',
@@ -165,8 +165,6 @@ const FooterNote = () => {
                   {[
                     { label: 'About Us', path: '/about-us' },
                     { label: 'Contact Us', path: '/contact-us' },
-                    { label: 'Blog', path: '#' },
-                    { label: 'Careers', path: '#' },
                   ].map((link, i) => (
                     <li key={i} style={{ marginBottom: '10px' }}>
                       <Link to={link.path} style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px', lineHeight: 1.6 }}>

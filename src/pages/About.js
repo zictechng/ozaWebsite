@@ -27,11 +27,7 @@ const About = () => {
           borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,95,213,0.15) 0%, transparent 70%)',
         }} />
         <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-block', background: 'rgba(76,95,213,0.2)', color: '#818cf8',
-            fontSize: '12px', fontWeight: 700, padding: '6px 16px',
-            borderRadius: '100px', marginBottom: '20px',
-          }}>ABOUT US</div>
+          
           <h1 style={{
             fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: '#fff',
             letterSpacing: '-0.02em', marginBottom: '20px', maxWidth: '600px', margin: '0 auto 20px',
@@ -39,7 +35,7 @@ const About = () => {
             We are building Nigeria's most trusted virtual funds platform
           </h1>
           <p style={{ color: '#94a3b8', fontSize: '1.1rem', lineHeight: 1.8, maxWidth: '540px', margin: '0 auto' }}>
-            {appName} was built to solve a real problem — exchanging virtual funds safely,
+            {appName} was built to solve a real problem, exchanging virtual funds safely,
             quickly, and at the best possible rate.
           </p>
         </div>
@@ -78,8 +74,8 @@ const About = () => {
               {/* Stats grid */}
               <div className="row g-3">
                 {[
-                  { value: '15,000+', label: 'Registered users', icon: '👥', color: '#EEF2FF', accent: '#4C5FD5' },
-                  { value: '98,000+', label: 'Orders delivered', icon: '⚡', color: '#D1FAE5', accent: '#10B981' },
+                  { value: '5,000+', label: 'Registered users', icon: '👥', color: '#EEF2FF', accent: '#4C5FD5' },
+                  { value: '100%', label: 'Satisfactory service', icon: '⚡', color: '#D1FAE5', accent: '#10B981' },
                   { value: '99%', label: 'Delivery success rate', icon: '✅', color: '#FEF3C7', accent: '#D97706' },
                   { value: '<10s', label: 'Average delivery time', icon: '🚀', color: '#EDE9FE', accent: '#7C3AED' },
                 ].map((s, i) => (
@@ -104,11 +100,7 @@ const About = () => {
       <section style={{ padding: '100px 0', background: '#F8FAFF' }}>
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '500px', margin: '0 auto 60px' }}>
-            <div style={{
-              display: 'inline-block', background: '#EEF2FF', color: '#4C5FD5',
-              fontSize: '12px', fontWeight: 700, padding: '6px 16px',
-              borderRadius: '100px', marginBottom: '16px',
-            }}>OUR VALUES</div>
+            
             <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#1A1F36', letterSpacing: '-0.02em' }}>
               What drives everything we build
             </h2>
@@ -118,7 +110,7 @@ const About = () => {
               { icon: '🔒', title: 'Trust first', desc: 'Every decision we make starts with trust — yours. Your money is encrypted, your transactions are protected, and your data is never sold.' },
               { icon: '⚡', title: 'Speed matters', desc: 'We know waiting is frustrating. We build direct connections to every provider so your order settles in seconds, not minutes.' },
               { icon: '💎', title: 'Fair rates always', desc: 'We publish our rates openly and never add hidden charges. What you see is what your wallet is charged — every single time.' },
-              { icon: '🤝', title: 'Built for Nigeria', desc: 'Every feature we build is designed for Nigerian users, on Nigerian networks, using Nigerian banks. This platform is for you.' },
+              { icon: '🤝', title: 'Built for African', desc: 'Every feature we build is designed for African users, on Nigerian networks, using Nigerian banks and more. This platform is for you.' },
               { icon: '🌱', title: 'Always improving', desc: 'We listen to feedback and ship improvements regularly. Every complaint is an opportunity to make {appName} better.' },
               { icon: '💬', title: 'Real support', desc: 'We actually answer. Reach us on WhatsApp or live chat and a real person responds — with your full order history already in front of them.' },
             ].map((v, i) => (
@@ -151,7 +143,7 @@ const About = () => {
             Ready to experience the difference?
           </h2>
           <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1rem', marginBottom: '36px' }}>
-            Join thousands of Nigerians already using {appName} to manage their virtual funds.
+            Join thousands of Nigerians already using {appName} to manage and sell their virtual funds.
           </p>
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/signup" style={{
@@ -174,3 +166,4 @@ const About = () => {
 };
 
 export default About;
+

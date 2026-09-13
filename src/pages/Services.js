@@ -55,9 +55,9 @@ const Services = () => {
       desc: 'Exchange your Bitcoin to Naira at transparent, live market-based rates. Quick, secure and fully tracked.',
     },
     {
-      icon: '🌍', title: 'Virtual Account Opening', color: '#D1FAE5', accent: '#10B981',
-      features: ['PayPal account creation', 'Payoneer account setup', 'Full verification support', 'Business accounts available'],
-      desc: 'Get foreign PayPal and Payoneer accounts opened and fully verified for you — individual and business accounts.',
+      icon: '🌍', title: 'Foreign Account Opening', color: '#D1FAE5', accent: '#10B981',
+      features: ['PayPal account creation', 'Payoneer account setup', 'Most Social Media Account', 'Full verification support', 'Business accounts available'],
+      desc: 'Get a foreign social media, PayPal and Payoneer accounts opened and fully verified for you, individual and business accounts available.',
     },
   ];
 
@@ -75,11 +75,7 @@ const Services = () => {
           borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,95,213,0.15) 0%, transparent 70%)',
         }} />
         <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-block', background: 'rgba(76,95,213,0.2)', color: '#818cf8',
-            fontSize: '12px', fontWeight: 700, padding: '6px 16px',
-            borderRadius: '100px', marginBottom: '20px',
-          }}>OUR SERVICES</div>
+          
           <h1 style={{
             fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: '#fff',
             letterSpacing: '-0.02em', marginBottom: '20px',
@@ -147,7 +143,7 @@ const Services = () => {
             One account. Every service.
           </h2>
           <p style={{ color: '#94a3b8', fontSize: '1rem', marginBottom: '36px' }}>
-            Create your free account and access all services from a single wallet.
+            Create your free account and access all services from a single platform.
           </p>
           <Link to="/signup" style={{
             background: '#4C5FD5', color: '#fff', padding: '14px 40px',
@@ -162,3 +158,4 @@ const Services = () => {
 };
 
 export default Services;
+

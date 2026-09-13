@@ -227,8 +227,8 @@ const Home = () => {
   const [statsVisible, setStatsVisible] = useState(false);
   const statsRef = useRef(null);
 
-  const users = useCounter(15000, 2000, statsVisible);
-  const orders = useCounter(98000, 2500, statsVisible);
+  const users = useCounter(5000, 2000, statsVisible);
+  const orders = useCounter(100, 1500, statsVisible);
   const rate = useCounter(99, 1500, statsVisible);
 
   useEffect(() => {
@@ -280,15 +280,7 @@ const Home = () => {
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="row align-items-center">
             <div className="col-lg-6 col-12" style={{ paddingRight: '40px' }}>
-              <div style={{
-                display: 'inline-flex', alignItems: 'center', gap: '8px',
-                background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)',
-                borderRadius: '100px', padding: '6px 16px', marginBottom: '28px',
-              }}>
-                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />
-                <span style={{ color: '#10B981', fontSize: '13px', fontWeight: 600 }}>
-                  Live · Orders settling in seconds
-                </span>
+              <div style={{}}>
               </div>
 
               <h1 style={{
@@ -348,7 +340,7 @@ const Home = () => {
               <div ref={statsRef} style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
                 {[
                   { value: `${users.toLocaleString()}+`, label: 'Registered users' },
-                  { value: `${orders.toLocaleString()}+`, label: 'Orders delivered' },
+                  { value: `${orders.toLocaleString()}%`, label: 'Satisfactory' },
                   { value: `${rate}%`, label: 'Delivery success' },
                 ].map((s, i) => (
                   <div key={i}>
@@ -381,7 +373,7 @@ const Home = () => {
         <div className="container">
           <div style={{ display: 'flex', alignItems: 'center', gap: '32px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <span style={{ color: '#a0aec0', fontSize: '13px', fontWeight: 600 }}>CONNECTED TO</span>
-            {['MTN', 'Airtel', 'Glo', '9mobile', 'DStv', 'GOtv', 'IKEDC', 'PayPal', 'Payoneer', 'Bitcoin'].map((n, i) => (
+            {['MTN', 'Airtel', 'Glo', '9mobile', 'DStv', 'GOtv', 'Electricity', 'PayPal', 'Payoneer', 'Bitcoin'].map((n, i) => (
               <span key={i} style={{
                 color: '#4a5568', fontSize: '13px', fontWeight: 700,
                 padding: '4px 12px', background: '#fff',
@@ -416,10 +408,10 @@ const Home = () => {
               { icon: '⚡', title: 'Electricity Bills', desc: 'Prepaid tokens and postpaid settlement for every DisCo in Nigeria.', tag: 'All DisCos', color: '#FEF3C7', accent: '#D97706' },
               { icon: '📺', title: 'Cable TV', desc: 'Renew or upgrade DStv, GOtv and Startimes — smartcard verified first.', tag: 'DStv · GOtv · Star', color: '#D1FAE5', accent: '#10B981' },
               { icon: '🎓', title: 'Exam Result Pins', desc: 'WAEC, NECO, NABTEB and JAMB pins delivered instantly to your dashboard.', tag: 'Instant delivery', color: '#FEE2E2', accent: '#EF4444' },
-              { icon: '💵', title: 'Sell PayPal', desc: 'Exchange your PayPal balance to Naira at the best competitive rate.', tag: 'Best rates', color: '#DBEAFE', accent: '#3B82F6' },
-              { icon: '💳', title: 'Sell Payoneer', desc: 'Convert your Payoneer earnings to Naira quickly and securely.', tag: 'Fast & secure', color: '#EDE9FE', accent: '#7C3AED' },
-              { icon: '₿', title: 'Sell Bitcoin', desc: 'Exchange Bitcoin to Naira at transparent, live market-based rates.', tag: 'Live rates', color: '#FEF3C7', accent: '#D97706' },
-              { icon: '🌍', title: 'Virtual Accounts', desc: 'Get foreign PayPal and Payoneer accounts opened and verified for you.', tag: 'New service', color: '#D1FAE5', accent: '#10B981' },
+              { icon: '💵', title: 'Sell PayPal', desc: 'Exchange your PayPal balance to your local currency at the best competitive rate.', tag: 'Best rates', color: '#DBEAFE', accent: '#3B82F6' },
+              { icon: '💳', title: 'Sell Payoneer', desc: 'Convert your Payoneer earnings to your local currency quickly and securely.', tag: 'Fast & secure', color: '#EDE9FE', accent: '#7C3AED' },
+              { icon: '₿', title: 'Sell Bitcoin', desc: 'Exchange Bitcoin to your local currency at transparent, live market-based rates.', tag: 'Live rates', color: '#FEF3C7', accent: '#D97706' },
+              { icon: '🌍', title: 'Verified Accounts', desc: 'Get foreign social media account, PayPal and Payoneer accounts opened and verified for you.', tag: 'New service', color: '#D1FAE5', accent: '#10B981' },
             ].map((s, i) => (
               <div key={i} className="col-lg-4 col-md-6 col-12">
                 <div style={{
@@ -480,7 +472,7 @@ const Home = () => {
               {[
                 { icon: '🔔', text: 'Instant delivery notifications' },
                 { icon: '📊', text: 'Full transaction history and reports' },
-                { icon: '🔐', text: 'Biometric & PIN security' },
+                { icon: '🔐', text: 'Secure authentication & PIN security' },
                 { icon: '⚡', text: 'One-tap repeat orders' },
               ].map((f, i) => (
                 <div key={i} style={{
@@ -592,8 +584,8 @@ const Home = () => {
           <div className="row g-4 justify-content-center">
             {[
               { num: '01', icon: '👤', title: 'Create your account', desc: 'Name, email and phone number. No documents needed to start. Live in under a minute.' },
-              { num: '02', icon: '💳', title: 'Fund your wallet', desc: 'Transfer to your dedicated account number from any bank app. Balance reflects instantly.' },
-              { num: '03', icon: '🔐', title: 'Set your PIN', desc: 'A 4-digit transaction PIN, separate from your password. Every purchase needs it.' },
+              { num: '02', icon: '🔐', title: 'Set your PIN', desc: 'A 4-digit transaction PIN, separate from your password. Every purchase needs it.' },
+              { num: '03', icon: '💳', title: 'Fund your wallet', desc: 'Transfer to your dedicated account number from any bank app. Balance reflects instantly.' },
               { num: '04', icon: '⚡', title: 'Buy, sell or pay', desc: 'Pick a service, confirm, enter your PIN. Done before you close the screen.' },
             ].map((step, i) => (
               <div key={i} className="col-lg-3 col-md-6 col-12">
@@ -640,11 +632,11 @@ const Home = () => {
                 fontSize: '2.2rem', fontWeight: 800, color: '#1A1F36',
                 lineHeight: 1.3, letterSpacing: '-0.02em', marginBottom: '20px',
               }}>
-                Why thousands of Nigerians trust {appName}
+                Why thousands of users trust {appName}
               </h2>
               <p style={{ color: '#718096', lineHeight: 1.8, marginBottom: '32px' }}>
                 We built {appName} around the exact things that frustrate
-                people about virtual fund platforms — and fixed every single one.
+                people about trusted virtual fund platforms and fixed every single one.
               </p>
               <a href="/signup" style={{
                 background: '#1A1F36', color: '#fff', padding: '13px 32px',
@@ -655,11 +647,11 @@ const Home = () => {
             <div className="col-lg-7 col-12">
               <div className="row g-3">
                 {[
-                  { icon: '💎', title: 'Best rates guaranteed', desc: 'Competitive PayPal, Payoneer and Bitcoin rates published openly — no surprises at the last step.' },
+                  { icon: '💎', title: 'Best rates guaranteed', desc: 'Competitive PayPal, Payoneer and Bitcoin rates published openly, no surprises at the last step.' },
                   { icon: '⚡', title: 'Delivered in seconds', desc: 'Direct provider connections, not a queue. Average order settles in under 10 seconds.' },
                   { icon: '🔒', title: 'Bank-grade security', desc: 'Encrypted transactions, separate transaction PIN, and automatic refunds on failed orders.' },
-                  { icon: '🌙', title: 'Always available 24/7', desc: 'Platform runs at 3am on public holidays — exactly when you need it most.' },
-                  { icon: '🎁', title: 'Earn while you transact', desc: 'Referral bonuses, signup rewards, and coins on every purchase — redeemable for cash.' },
+                  { icon: '🌙', title: 'Always available 24/7', desc: 'Platform runs 24/7, exactly when you need it most.' },
+                  { icon: '🎁', title: 'Earn while you transact', desc: 'Referral bonuses, signup rewards, and coins on every purchase, redeemable for cash.' },
                   { icon: '💬', title: 'Real human support', desc: 'Reach us on WhatsApp with your full order history already in front of us.' },
                 ].map((r, i) => (
                   <div key={i} className="col-md-6 col-12">
@@ -695,14 +687,14 @@ const Home = () => {
               borderRadius: '100px', marginBottom: '16px',
             }}>WHAT USERS SAY</div>
             <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#1A1F36', letterSpacing: '-0.02em' }}>
-              Trusted by thousands of Nigerians
+              Trusted by thousands of users
             </h2>
           </div>
           <div className="row g-4">
             {[
               { text: 'One order failed at midnight and the money was back in my wallet before I finished typing the complaint. That is the kind of service that keeps me here.', name: 'Chinedu E.', role: 'Lagos', avatar: 'C', color: '#4C5FD5' },
               { text: 'I pay my electricity, renew DStv and buy data for three phones from the same wallet. The electricity token stays on my receipt so I never lose it again.', name: 'Funmi A.', role: 'Abuja', avatar: 'F', color: '#10B981' },
-              { text: 'Selling my PayPal used to take hours with strangers. Now I submit the request and my Naira is credited within the hour. No stress, no risk.', name: 'Musa B.', role: 'Kano', avatar: 'M', color: '#6C63FF' },
+              { text: 'Selling my PayPal used to take hours with strangers and most time I lose my money, Now I submit the request and my account is credited within the hour. No stress, no risk.', name: 'Musa B.', role: 'Kano', avatar: 'M', color: '#6C63FF' },
             ].map((t, i) => (
               <div key={i} className="col-lg-4 col-md-6 col-12">
                 <div style={{
@@ -756,9 +748,9 @@ const Home = () => {
                 {[
                   { q: 'How fast will my order land?', a: 'Most orders settle in under 10 seconds. Electricity and cable can take slightly longer because the biller confirms first — but your dashboard always shows the true status.' },
                   { q: 'What happens if my order fails?', a: 'Your wallet is refunded automatically. No ticket needed, no screenshot to send. The failed order stays in your history marked as refunded.' },
-                  { q: 'How do I fund my wallet?', a: 'Every account gets a dedicated account number the moment you register. Transfer from any bank app and your balance updates instantly. Card funding is also available.' },
-                  { q: 'How do I sell my PayPal, Payoneer or Bitcoin?', a: 'Log in, go to the Sales section, enter your amount and submit your proof. Admin reviews and credits your Naira wallet — usually within a few hours.' },
-                  { q: 'Is there a minimum amount?', a: 'No. Fund with any amount and buy airtime from ₦50. No monthly fee, no minimum balance, nothing deducted for keeping the account open.' },
+                  { q: 'How do I fund my wallet?', a: 'Every user have access to fund account from the app the moment you login. User can also transfer from any bank app and your balance updates instantly. Card funding is also available.' },
+                  { q: 'How do I sell my PayPal, Payoneer or Bitcoin?', a: 'Log in, go to the Sales section, enter your amount and submit your proof. Admin reviews and credits your local currency wallet, usually within a few minutes.' },
+                  { q: 'Is there a minimum amount?', a: 'No. Funding maybe applied but service purchase with any amount and buy airtime from ₦50. No monthly fee, no minimum balance, nothing deducted for keeping the account open.' },
                   { q: 'Can I withdraw my balance?', a: 'Yes, to your bank account whenever you want. No lock-in period, no waiting for a settlement window.' },
                   { q: 'Is my money safe?', a: 'Every transaction is encrypted. Each purchase needs your 4-digit transaction PIN — separate from your password — so a borrowed phone cannot spend your balance.' },
                   { q: 'Can I earn money by referring friends?', a: 'Yes. You earn a bonus when friends you refer make their first qualifying transaction. Active users can also become promoters and earn ongoing commissions.' },

@@ -76,11 +76,7 @@ const Contact = () => {
           borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,95,213,0.15) 0%, transparent 70%)',
         }} />
         <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-block', background: 'rgba(76,95,213,0.2)', color: '#818cf8',
-            fontSize: '12px', fontWeight: 700, padding: '6px 16px',
-            borderRadius: '100px', marginBottom: '20px',
-          }}>CONTACT US</div>
+          
           <h1 style={{
             fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: '#fff',
             letterSpacing: '-0.02em', marginBottom: '20px',
