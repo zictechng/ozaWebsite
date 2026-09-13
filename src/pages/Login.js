@@ -18,6 +18,7 @@ const Login = () => {
   const [showLoader, setShowLoader] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [ssoToken, setSsoToken] = useState('');
 
   const processLogin = async () => {
     if (!userEmail || !userPassword) {
@@ -35,11 +36,9 @@ const Login = () => {
         password: userPassword,
       });
       if (res.data.msg === '200') {
-        // Store token for user portal auto-login
-        sessionStorage.setItem('ota_sso_credentials', JSON.stringify({
-          username: userEmail,
-          password: userPassword,
-        }));
+        // Encode the full API response as a base64 URL param — same shape Redux expects
+        const ssoPayload = btoa(JSON.stringify(res.data));
+        setSsoToken(ssoPayload);       // store for use in modal button
         setUserEmail('');
         setUserPassword('');
         setShowModal(true);
@@ -290,7 +289,7 @@ const Login = () => {
         </Modal.Body>
         <Modal.Footer style={{ border: 'none', justifyContent: 'center', paddingBottom: '28px', gap: '12px', flexDirection: 'column', padding: '16px 32px 28px' }}>
           {/* Primary — Web Portal */}
-          <a href="http://localhost:3000"
+          <a href={`${process.env.REACT_APP_PORTAL_URL || 'http://localhost:3000'}/auth/sign-in?sso=${ssoToken}`}
             style={{
               display: 'block', width: '100%', textAlign: 'center',
               background: '#4C5FD5', color: '#fff', borderRadius: '10px',
