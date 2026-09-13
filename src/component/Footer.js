@@ -18,7 +18,7 @@ const FooterNote = () => {
     }
     setNewsletterLoading(true);
     try {
-      const res = await client.post('/api/newsletter_subscriptions', { email: newsletter });
+      const res = await client.post('/api/newsletter_subscriptions', { newsletter_subscriptions: newsletter });
       if (res.data.msg === '200') {
         setNewsletterMsg('Thank you for subscribing! You will receive updates from us.');
         setNewsletter('');

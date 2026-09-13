@@ -36,10 +36,10 @@ const Contact = () => {
     setShowLoader(true);
     try {
       const res = await client.post('/api/submit_ticketWebsite', {
-        name: fullName,
-        phone: contactPhone,
-        email: contactEmail,
-        message: contactMessage,
+        customer_name: fullName,
+        customer_phone: contactPhone,
+        customer_email: contactEmail,
+        customer_message: contactMessage,
       });
       if (res.data.msg === '200') {
         setSubmitted(true);

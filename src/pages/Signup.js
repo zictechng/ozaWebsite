@@ -24,7 +24,7 @@ const Signup = () => {
   const [showModal, setShowModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [phone, setPhone] = useState('');
-  const [country, setCountry] = useState({});
+  const [country, setCountry] = useState({ name: 'Nigeria' });
   const [step, setStep] = useState(1); // 1 = personal, 2 = security
 
   const handleOnChange = (value, countryData) => {

@@ -20,7 +20,7 @@ const TermsCondition = () => {
   const fetchContent = async () => {
     try {
       const res = await client.get('/api/fetchAboutCompany');
-      if (res.data) setContent(res.data.term_condition || '');
+      if (res.data?.infoData) setContent(res.data.infoData.company_term_conditions || '');
     } catch (e) {
       console.log(e.message);
     } finally {

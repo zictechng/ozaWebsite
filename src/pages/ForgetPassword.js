@@ -27,7 +27,7 @@ const ForgetPassword = () => {
     }
     setShowLoader(true);
     try {
-      const res = await client.post('/api/forgetPasswordMobile', { email: userEmail });
+      const res = await client.post('/api/forgetPasswordMobile', { forget_details: userEmail });
       if (res.data.msg === '200') {
         navigate('/reset-password', { state: { userEmailId: userEmail, otpCode: res.data.otpPin }, replace: true });
       } else {
