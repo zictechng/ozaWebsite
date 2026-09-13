@@ -36,7 +36,7 @@ const Login = () => {
         password: userPassword,
       });
       if (res.data.msg === '200') {
-        const encoded = btoa(JSON.stringify(res.data));
+        const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(res.data))));
         setSsoToken(encoded);
 
         setUserEmail('');
