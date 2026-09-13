@@ -1,289 +1,218 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import MenuBar from '../component/Menu';
-import FooterNote from '../component/Footer';
-
-import { useNavigate, useLocation  } from 'react-router-dom';
-import Spinner from 'react-bootstrap/Spinner';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-
-import { Bounce, ToastContainer, toast } from 'react-toastify';
-
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import client from '../component/client';
+import useAppInfo from '../component/useAppInfo';
 
 const VerifyAccount = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  
-  if(state?.userEmailId === null || state?.userEmailId === '' || state?.userEmailId === undefined){
-    navigate('/signup');
-  }
-  const [userOTP, setUserOTP] = useState("");
+  const { appName, appLogo } = useAppInfo();
+
+  const [userOTP, setUserOTP] = useState('');
   const [showLoader, setShowLoader] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [resendLoader, setResendLoader] = useState(false);
+  const [verified, setVerified] = useState(false);
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
 
-  //console.log(" my Data " , state?.userEmailId)
-
-  const closeModal = () =>{
-    setShowModal(false);
-    setShowLoader(false) 
-  }
-   // function to process the registration
-   const activateAccount = async() => {
-    setShowLoader(true)
-      const sendData ={
-        "otp_code": userOTP,
-        "user_email": state?.userEmailId
-       }
-        
-        if(userOTP === '' || userOTP == null){
-            toast.error("Please enter OTP Code",
-            {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              transition: Bounce,
-              newestOnTop: false,
-              theme: "colored",
-              });
-              setShowLoader(false) 
-            return
-          }
-
-        if(userOTP.length < 6 || userOTP.length > 6){
-          toast.error("OTP Code should be 6 characters length",
-          {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            transition: Bounce,
-            newestOnTop: false,
-            theme: "colored",
-            });
-            setShowLoader(false) 
-          return
-        }
-
-      //console.log("Sending...", sendData)
-      try {
-        const res = await client.post(`/api/otp_verify`, sendData, {
-        })
-        if(res.data.msg ==='200'){
-toast.success('Account Activated successfully! Download the app to continue',
-              {
-                position: "top-right",
-                autoClose: 6000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                transition: Bounce,
-                newestOnTop: false,
-                theme: "light",
-                });
-                setUserOTP("")
-                setShowModal(true);
-              }
-          else if(res.data.status =='500'){
-            toast.error(res.data.message, {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              });
-            }
-          else if(res.data.status =='400'){
-          toast.error(res.data.message, {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
-          }
-          else if(res.data.status =='401'){
-            toast.error(res.data.message, {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              });
-            }
-            else if(res.data.status =='404'){
-              toast.error(res.data.message, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
-              }
-          } catch (error) {
-            console.log(error.message)
-          }
-          finally{
-            setShowLoader(false)
-            }
-        }
-
-        
   useEffect(() => {
-    if(state?.userEmailId === null || state?.userEmailId === '' || state?.userEmailId === undefined){
-      navigate('/signup');
-    }
+    if (!state?.userEmailId) navigate('/signup');
+    document.title = `Verify Account — ${appName}`;
+  }, [state, navigate, appName]);
 
-    function fadeout() {
-        document.querySelector('.preloader').style.opacity = '0';
-        document.querySelector('.preloader').style.display = 'none';
+  const handleOtpChange = (value, index) => {
+    if (!/^\d*$/.test(value)) return;
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+    setUserOTP(newOtp.join(''));
+    if (value && index < 5) {
+      document.getElementById(`otp-${index + 1}`)?.focus();
     }
-    const timeoutID = window.setTimeout(fadeout,() => {
-    }, 2000);
-    
-     return () => window.clearTimeout(timeoutID );
-     
-}, [navigate, state.userEmailId])
+  };
+
+  const handleOtpKeyDown = (e, index) => {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+      document.getElementById(`otp-${index - 1}`)?.focus();
+    }
+  };
+
+  const activateAccount = async () => {
+    const code = otp.join('');
+    if (code.length !== 6) {
+      toast.error('Please enter the complete 6-digit OTP code');
+      return;
+    }
+    setShowLoader(true);
+    try {
+      const res = await client.post('/api/otp_verify', {
+        otp_code: code,
+        user_email: state?.userEmailId,
+      });
+      if (res.data.msg === '200') {
+        setVerified(true);
+      } else {
+        toast.error(res.data.message || 'Invalid OTP. Please try again.');
+        setOtp(['', '', '', '', '', '']);
+        setUserOTP('');
+        document.getElementById('otp-0')?.focus();
+      }
+    } catch {
+      toast.error('Connection error. Please try again.');
+    } finally {
+      setShowLoader(false);
+    }
+  };
+
+  const resendOTP = async () => {
+    setResendLoader(true);
+    try {
+      const res = await client.post('/api/resend_otp', { user_email: state?.userEmailId });
+      if (res.data.msg === '200') {
+        toast.success('A new OTP has been sent to your email');
+        setOtp(['', '', '', '', '', '']);
+        setUserOTP('');
+      } else {
+        toast.error(res.data.message || 'Failed to resend OTP');
+      }
+    } catch {
+      toast.error('Connection error. Please try again.');
+    } finally {
+      setResendLoader(false);
+    }
+  };
 
   return (
-    <>
     <Fragment>
-    <div className="preloader">
-        <div className="preloader-inner">
-          <div className="preloader-icon">
-            <span></span>
-            <span></span>
+      <ToastContainer position="top-right" autoClose={4000} theme="colored" />
+      <div style={{ minHeight: '100vh', background: '#F8FAFF', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
+        <div style={{ width: '100%', maxWidth: '440px' }}>
+
+          {/* Logo */}
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+              {appLogo ? (
+                <img src={appLogo} alt={appName} style={{ height: '36px' }} />
+              ) : (
+                <div style={{
+                  width: '40px', height: '40px', borderRadius: '10px',
+                  background: 'linear-gradient(135deg, #4C5FD5, #6C63FF)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#fff', fontWeight: 800, fontSize: '18px',
+                }}>{appName?.charAt(0) || 'O'}</div>
+              )}
+              <span style={{ color: '#1A1F36', fontWeight: 800, fontSize: '20px' }}>{appName}</span>
+            </Link>
+          </div>
+
+          <div style={{
+            background: '#fff', borderRadius: '20px', padding: '40px',
+            border: '1px solid #e8edf5', boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+            textAlign: 'center',
+          }}>
+            {verified ? (
+              <>
+                <div style={{ fontSize: '56px', marginBottom: '16px' }}>🎉</div>
+                <h2 style={{ fontWeight: 800, color: '#1A1F36', fontSize: '1.5rem', marginBottom: '12px' }}>
+                  Account Verified!
+                </h2>
+                <p style={{ color: '#718096', fontSize: '15px', lineHeight: 1.8, marginBottom: '32px' }}>
+                  Your account has been successfully verified.
+                  Download the {appName} app to get started or sign in from the web.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  <a href="/#" style={{
+                    background: '#4C5FD5', color: '#fff', padding: '13px',
+                    borderRadius: '10px', fontWeight: 700, fontSize: '15px',
+                    textDecoration: 'none', display: 'block',
+                  }}>📱 Download the App</a>
+                  <Link to="/login" style={{
+                    background: '#F8FAFF', color: '#4C5FD5', padding: '13px',
+                    borderRadius: '10px', fontWeight: 600, fontSize: '15px',
+                    textDecoration: 'none', display: 'block', border: '1px solid #e8edf5',
+                  }}>Sign In →</Link>
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={{
+                  width: '64px', height: '64px', borderRadius: '16px',
+                  background: '#EEF2FF', display: 'flex', alignItems: 'center',
+                  justifyContent: 'center', fontSize: '28px', margin: '0 auto 20px',
+                }}>📧</div>
+                <h2 style={{ fontWeight: 800, color: '#1A1F36', fontSize: '1.4rem', marginBottom: '8px' }}>
+                  Check your email
+                </h2>
+                <p style={{ color: '#718096', fontSize: '14px', lineHeight: 1.7, marginBottom: '8px' }}>
+                  We sent a 6-digit verification code to
+                </p>
+                <p style={{ color: '#4C5FD5', fontWeight: 700, fontSize: '15px', marginBottom: '32px' }}>
+                  {state?.userEmailId}
+                </p>
+
+                {/* OTP boxes */}
+                <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '28px' }}>
+                  {otp.map((digit, i) => (
+                    <input
+                      key={i}
+                      id={`otp-${i}`}
+                      type="text"
+                      maxLength={1}
+                      value={digit}
+                      onChange={e => handleOtpChange(e.target.value, i)}
+                      onKeyDown={e => handleOtpKeyDown(e, i)}
+                      style={{
+                        width: '48px', height: '56px', textAlign: 'center',
+                        fontSize: '1.4rem', fontWeight: 800, color: '#1A1F36',
+                        border: `2px solid ${digit ? '#4C5FD5' : '#e2e8f0'}`,
+                        borderRadius: '12px', outline: 'none',
+                        background: digit ? '#EEF2FF' : '#fff',
+                        transition: 'all 0.2s', fontFamily: 'inherit',
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={activateAccount}
+                  disabled={showLoader || otp.join('').length !== 6}
+                  style={{
+                    width: '100%', padding: '14px', background: '#4C5FD5',
+                    color: '#fff', border: 'none', borderRadius: '10px',
+                    fontWeight: 700, fontSize: '15px', cursor: 'pointer',
+                    opacity: (showLoader || otp.join('').length !== 6) ? 0.6 : 1,
+                    fontFamily: 'inherit', marginBottom: '16px',
+                  }}>
+                  {showLoader ? 'Verifying...' : 'Verify Account'}
+                </button>
+
+                <p style={{ color: '#718096', fontSize: '14px' }}>
+                  Didn't receive the code?{' '}
+                  <button
+                    onClick={resendOTP}
+                    disabled={resendLoader}
+                    style={{
+                      background: 'none', border: 'none', color: '#4C5FD5',
+                      fontWeight: 600, cursor: 'pointer', fontSize: '14px',
+                      fontFamily: 'inherit', padding: 0,
+                    }}>
+                    {resendLoader ? 'Sending...' : 'Resend code'}
+                  </button>
+                </p>
+
+                <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid #f1f5f9' }}>
+                  <Link to="/signup" style={{ color: '#718096', fontSize: '14px', textDecoration: 'none' }}>
+                    ← Back to signup
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
-        <MenuBar />
-        <ToastContainer/>
-        <div className="breadcrumbs">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-6 offset-lg-3 col-md-12 col-12">
-                <div className="breadcrumbs-content">
-                  <h1 className="page-title">Verify</h1>
-                  <ul className="breadcrumb-nav">
-                    <li>
-                      <a href="/">Home</a>
-                    </li>
-                    <li>Confirm your signup details</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="account-login section">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
-                <form className="card login-form inner-content" onSubmit={e => e.preventDefault()}>
-                  <div className="card-body">
-                    <div className="title">
-                      <h3>Verify your account</h3>
-                      <p>We sent verification code <b>OTP Code</b> to your registered email address. It might take sometime to arrival, ensure to check your spam box.</p>
-                    </div>
-                    
-                    <div className="or">
-                      <span></span>
-                    </div>
-                    <div className="input-head">
-                      <div className="form-group input-group">
-                        <label>
-                          <i className="lni lni-lock-alt"></i>
-                        </label>
-                        <input
-                          className="form-control"
-                          type="password"
-                          placeholder="Enter the OTP Code"
-                          required
-                          value={userOTP}
-                          onChange={(e) => setUserOTP(e.target.value)}
-                        />
-                      </div>
-                      
-                    </div>
-                    <div className="button">
-                    <button className="btn" onClick={() => activateAccount()} disabled={showLoader}>
-                        
-                      {showLoader ? <>
-                      <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                        />{" "}
-                          Verifying...
-                        </> : 'Verify Account'}
-                    </button>
-                    </div>
-                    <h4 className="create-account">
-                      I don't get any email? <a href="#">Resend OTP</a>
-                    </h4>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* <!-- Vertically centered modal --> */}
-      <Modal show={showModal} 
-          onHide={closeModal}
-          aria-labelledby="contained-modal-title-vcenter"
-          centered
-          backdrop="static"
-          keyboard={false}>
-          <Modal.Header>
-          <Modal.Title>Account Verified</Modal.Title>
-        </Modal.Header>
-            <Modal.Body style={{ fontSize: 18 }}>
-              Your account has been verified successfully.<br/>
-              Please, download the mobile app from the app stores to continue<br/>
-              <div className="row col-xs-3">
-              <div className="btn">
-                  {/* <a href="#" className="btn me-1" style={{backgroundColor:'#595F90', color:'#fff'}}><i className="lni lni-apple"></i> App Store</a> */}
-                  <a href="https://play.google.com/store/apps/details?id=com.ozaapp.mobile" className="btn" style={{backgroundColor:'#1D2667', color:'#fff'}}><i className="lni lni-play-store"></i> Google Play</a><br/>
-                  </div>
-              </div>
-              After download, login with your registered details and start to enjoy the amazing offer we have for you. <br/>
-              Thank you.
-              </Modal.Body>
-                <Modal.Footer>
-                {/* <Button variant="secondary" onClick={closeModal}>
-                Close
-              </Button> */}
-                <a href='/'><Button className="btn">Okay</Button></a>
-            </Modal.Footer>
-        
-          </Modal>
-        <FooterNote/>
-      </Fragment>
-    </>
+    </Fragment>
   );
-}
+};
 
 export default VerifyAccount;

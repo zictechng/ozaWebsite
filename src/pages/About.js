@@ -1,516 +1,175 @@
-import React, { Fragment, useEffect } from "react";
-import MenuBar from "../component/Menu";
-import FooterNote from "../component/Footer";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import MenuBar from '../component/Menu';
+import FooterNote from '../component/Footer';
+import useAppInfo from '../component/useAppInfo';
 
 const About = () => {
-  useEffect(() => {
-    
-    function fadeout() {
-      document.querySelector('.preloader').style.opacity = '0';
-      document.querySelector('.preloader').style.display = 'none';
-  }
-    const timeoutID = window.setTimeout(fadeout,() => {
-   }, 2000);
-// eslint-disable-next-line no-undef
-  tns({
-  container: '.testimonial-slider',
-  items: 3,
-  slideBy: 'page',
-  autoplay: false,
-  mouseDrag: true,
-  gutter: 0,
-  nav: true,
-  controls: false,
-  responsive: {
-      0: {
-          items: 1,
-      },
-      540: {
-          items: 1,
-      },
-      768: {
-          items: 2,
-      },
-      992: {
-          items: 2,
-      },
-      1170: {
-          items: 3,
-      }
-  }
-  });
-    return () => window.clearTimeout(timeoutID );
+  const { appName } = useAppInfo();
 
-}, [])
+  useEffect(() => {
+    document.title = `About Us — ${appName}`;
+    window.scrollTo(0, 0);
+  }, [appName]);
 
   return (
-    <>
     <Fragment>
-      <div className="preloader">
-        <div className="preloader-inner">
-          <div className="preloader-icon">
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      </div>
+      <MenuBar />
 
-     {/* menu comes here */}
-     <MenuBar />
-      <div className="breadcrumbs">
+      {/* Hero */}
+      <section style={{
+        background: 'linear-gradient(135deg, #0F1629 0%, #1a2547 100%)',
+        padding: '160px 0 80px', position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute', top: '-100px', right: '-100px', width: '500px', height: '500px',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,95,213,0.15) 0%, transparent 70%)',
+        }} />
+        <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+          <div style={{
+            display: 'inline-block', background: 'rgba(76,95,213,0.2)', color: '#818cf8',
+            fontSize: '12px', fontWeight: 700, padding: '6px 16px',
+            borderRadius: '100px', marginBottom: '20px',
+          }}>ABOUT US</div>
+          <h1 style={{
+            fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: '#fff',
+            letterSpacing: '-0.02em', marginBottom: '20px', maxWidth: '600px', margin: '0 auto 20px',
+          }}>
+            We are building Nigeria's most trusted virtual funds platform
+          </h1>
+          <p style={{ color: '#94a3b8', fontSize: '1.1rem', lineHeight: 1.8, maxWidth: '540px', margin: '0 auto' }}>
+            {appName} was built to solve a real problem — exchanging virtual funds safely,
+            quickly, and at the best possible rate.
+          </p>
+        </div>
+      </section>
+
+      {/* Mission */}
+      <section style={{ padding: '100px 0', background: '#fff' }}>
         <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-6 offset-lg-3 col-md-12 col-12">
-              <div className="breadcrumbs-content">
-                <h1 className="page-title">About Us</h1>
-                <ul className="breadcrumb-nav">
-                  <li>
-                    <a href="/">Home</a>
-                  </li>
-                  <li>About Us</li>
-                </ul>
+          <div className="row align-items-center g-5">
+            <div className="col-lg-6 col-12">
+              <div style={{
+                display: 'inline-block', background: '#EEF2FF', color: '#4C5FD5',
+                fontSize: '12px', fontWeight: 700, padding: '6px 16px',
+                borderRadius: '100px', marginBottom: '16px',
+              }}>OUR MISSION</div>
+              <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#1A1F36', letterSpacing: '-0.02em', marginBottom: '20px' }}>
+                Making virtual funds accessible and profitable for every Nigerian
+              </h2>
+              <p style={{ color: '#718096', fontSize: '1rem', lineHeight: 1.9, marginBottom: '20px' }}>
+                We started {appName} because we understood the frustration — finding a reliable
+                platform to sell PayPal, Payoneer or Bitcoin was risky, slow, and often unprofitable.
+                Rates were hidden, delays were common, and trust was hard to find.
+              </p>
+              <p style={{ color: '#718096', fontSize: '1rem', lineHeight: 1.9, marginBottom: '32px' }}>
+                We built a platform that is transparent, fast, and fair. One wallet for
+                everything — buy airtime, pay bills, sell virtual funds, and earn rewards
+                on every transaction. No surprises, no delays.
+              </p>
+              <Link to="/signup" style={{
+                background: '#4C5FD5', color: '#fff', padding: '13px 32px',
+                borderRadius: '10px', fontWeight: 700, fontSize: '15px',
+                textDecoration: 'none', display: 'inline-block',
+              }}>Join {appName} today →</Link>
+            </div>
+            <div className="col-lg-6 col-12">
+              {/* Stats grid */}
+              <div className="row g-3">
+                {[
+                  { value: '15,000+', label: 'Registered users', icon: '👥', color: '#EEF2FF', accent: '#4C5FD5' },
+                  { value: '98,000+', label: 'Orders delivered', icon: '⚡', color: '#D1FAE5', accent: '#10B981' },
+                  { value: '99%', label: 'Delivery success rate', icon: '✅', color: '#FEF3C7', accent: '#D97706' },
+                  { value: '<10s', label: 'Average delivery time', icon: '🚀', color: '#EDE9FE', accent: '#7C3AED' },
+                ].map((s, i) => (
+                  <div key={i} className="col-6">
+                    <div style={{
+                      background: s.color, borderRadius: '16px', padding: '24px',
+                      textAlign: 'center',
+                    }}>
+                      <div style={{ fontSize: '28px', marginBottom: '8px' }}>{s.icon}</div>
+                      <div style={{ fontSize: '1.8rem', fontWeight: 800, color: s.accent, marginBottom: '4px' }}>{s.value}</div>
+                      <div style={{ fontSize: '13px', color: '#718096' }}>{s.label}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-        <section className="freatures section bg-white">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-12 col-12">
-                  <h4 className="heading wow fadeInUp" data-wow-delay=".5s">
-                    Who we area
-                  </h4>
-                  <br/>
-                <div className="image wow fadeInLeft" data-wow-delay=".3s">
-                  <h3>WE BUY, SELL VIRTUAL FUNDS AND UTILITY BILLS PAYMENT</h3>
-                </div>
-                <br/><br/>
-                    <p style={{fontSize: 20, textAlign:'justify'}}>
-                     Zictech Technologies Limited is a registered company with the CAC Act in Federal Republic of Nigeria and with The Financial Crime Commission (EFCC), this is to give you safety when dealing with us. <br/>
-                     Oza is a product of Zictech Technologies Limited and it was birthed from an idea to provide a reliable solution of a wide range of digital assets, such as <b>Paypal, Payoneer and Bitcoin</b> as well as other digital transaction.
-                    </p>
-              </div>
-            </div>
+      {/* Values */}
+      <section style={{ padding: '100px 0', background: '#F8FAFF' }}>
+        <div className="container">
+          <div style={{ textAlign: 'center', maxWidth: '500px', margin: '0 auto 60px' }}>
+            <div style={{
+              display: 'inline-block', background: '#EEF2FF', color: '#4C5FD5',
+              fontSize: '12px', fontWeight: 700, padding: '6px 16px',
+              borderRadius: '100px', marginBottom: '16px',
+            }}>OUR VALUES</div>
+            <h2 style={{ fontSize: '2rem', fontWeight: 800, color: '#1A1F36', letterSpacing: '-0.02em' }}>
+              What drives everything we build
+            </h2>
           </div>
-        </section>
-
-        <section className="freatures section bg-white">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-5 col-12">
-                <div className="image wow fadeInLeft" data-wow-delay=".3s">
-                  <img src="assets/images/features/feature-img2.png" alt="#" />
+          <div className="row g-4">
+            {[
+              { icon: '🔒', title: 'Trust first', desc: 'Every decision we make starts with trust — yours. Your money is encrypted, your transactions are protected, and your data is never sold.' },
+              { icon: '⚡', title: 'Speed matters', desc: 'We know waiting is frustrating. We build direct connections to every provider so your order settles in seconds, not minutes.' },
+              { icon: '💎', title: 'Fair rates always', desc: 'We publish our rates openly and never add hidden charges. What you see is what your wallet is charged — every single time.' },
+              { icon: '🤝', title: 'Built for Nigeria', desc: 'Every feature we build is designed for Nigerian users, on Nigerian networks, using Nigerian banks. This platform is for you.' },
+              { icon: '🌱', title: 'Always improving', desc: 'We listen to feedback and ship improvements regularly. Every complaint is an opportunity to make {appName} better.' },
+              { icon: '💬', title: 'Real support', desc: 'We actually answer. Reach us on WhatsApp or live chat and a real person responds — with your full order history already in front of them.' },
+            ].map((v, i) => (
+              <div key={i} className="col-lg-4 col-md-6 col-12">
+                <div style={{
+                  background: '#fff', borderRadius: '16px', padding: '28px',
+                  border: '1px solid #e8edf5', height: '100%',
+                }}>
+                  <div style={{
+                    width: '52px', height: '52px', borderRadius: '12px',
+                    background: '#EEF2FF', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', fontSize: '24px', marginBottom: '16px',
+                  }}>{v.icon}</div>
+                  <h4 style={{ fontWeight: 700, color: '#1A1F36', fontSize: '1rem', marginBottom: '10px' }}>{v.title}</h4>
+                  <p style={{ color: '#718096', fontSize: '14px', lineHeight: 1.7, margin: 0 }}>{v.desc.replace('{appName}', appName)}</p>
                 </div>
               </div>
-              <div className="col-lg-7 col-12">
-                <div className="content">
-                  <h3 className="heading wow fadeInUp" data-wow-delay=".5s">
-                   Our Journey
-                  </h3>
-                  <p style={{fontSize: 20, textAlign:'justify'}}>
-                      It began with a passion for pioneering changes in the digital economy world. We set out to redefine the landscape of earning actual value for your digital currency exchange, specializing in virtual funds (<b>Paypal, Payoneer, Bitcoin</b>) and digital utility bills payment.<br/>
-The core of our mission is a commitment to providing seamless and secure virtual funds selling and buying experiences. We recognized the hard work remote workers <b>(freelances)</b> put in, in earning their virtual funds in a global community by working remotely online day-in day-out and aimed to bridge the gap by providing a platform that simplifies, reduce risk of losing money to an unknown person(s) and the complexities of virtual funds exchanging.<br/>
-From day one, our focus has been on creating a trustworthy platform where users can rely on, confidently sell their virtual funds, or pay bills with ease with their virtual funds. <br/>Our user-friendly interfaces, competitive rates, secure, and swift transactions delivery has positioned us as a reliable partner in the dynamic digital world.<br/>
-As we continue to grow, our journey is shaped by the relationships we build, the innovations we embrace, and the satisfaction of our users. Join us on this exciting journey as we pave the way for a new era in virtual currency earning, empowering individuals and youth across the globe <b>(African in particular)</b> to navigate the global digital economy by working remotely online with confidence, knowing they will earn actual value for their hard earned money."
-
-                    </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="freatures section">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-6 col-12">
-                
-                <div className="content">
-                  <h3 className="heading wow fadeInUp" data-wow-delay=".5s">
-                   Our Core Values
-                  </h3>
-                  <p style={{fontSize: 20, textAlign:'justify'}}> Our values are the guiding principles that define who we are and how we operate. These values shape our culture, drive our decisions, and reflect our commitment to excellence. We are proud to stand by:
-                  </p>
-                  <br/>
-                  <div className="single-feature wow fadeInUp" data-wow-delay=".6s">
-                    
-                    <h4>Innovation</h4>
-                    <p style={{fontSize: 20, textAlign:'justify'}}>
-                    Embracing change and fostering a culture of innovation, we constantly seek new ways to improve on our solution and stay up to date in the dynamic worlds of digital currency and exchanges.
-                    </p>
-                  </div>
-
-                  <div className="single-feature wow fadeInUp" data-wow-delay=".7s">
-                    
-                    <h4>Credibility</h4>
-                    <p style={{fontSize: 20, textAlign:'justify'}}>
-                    We understand that credibility is earned through consistent integrity, reliability, and a dedication to our users' trust. We stand firm in our commitment to providing a credible platform for all your virtual funds selling and buying.
-                    </p>
-                  </div>
-
-                  <div className="single-feature wow fadeInUp" data-wow-delay="0.8s">
-                    <h4>Integrity</h4>
-                    <p style={{fontSize: 20, textAlign:'justify'}}>
-                    We prioritize transparency and honesty in all our interactions and services. Trust is the foundation of our relationships, and we uphold the highest ethical standards.
-                    </p>
-                  </div>
-
-                  <div className="single-feature wow fadeInUp" data-wow-delay="0.8s">
-                    <h4>Empowerment</h4>
-                    <p style={{fontSize: 20, textAlign:'justify'}}>
-                    We believe in the power of a connected community. By fostering a supportive and inclusive environment, we aim to create a space where ideas flourish, individuals being financial empowered and relationships thrive.
-                    </p>
-                  </div>
-
-                    <div className="single-feature wow fadeInUp" data-wow-delay="0.8s">
-
-                    <h4>Reliability</h4>
-                    <p style={{fontSize: 20, textAlign:'justify'}}>
-                    We strive for unwavering consistency in our services. We understand the importance of a reliable solution, from transaction processing to customer support, our users can rely on a consistent and dependable user experience each time they engage with our platform.
-                    </p>
-                  </div>
- 
-                </div>
-              </div>
-              <div className="col-lg-5 col-12">
-                <div className="image wow fadeInLeft" data-wow-delay=".3s">
-                  <img src="assets/images/features/feature-img3.png" alt="#" />
-                </div>
-              </div>
-            </div>
+      {/* CTA */}
+      <section style={{
+        background: 'linear-gradient(135deg, #4C5FD5 0%, #6C63FF 100%)',
+        padding: '80px 0', textAlign: 'center',
+      }}>
+        <div className="container">
+          <h2 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, marginBottom: '16px', letterSpacing: '-0.02em' }}>
+            Ready to experience the difference?
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '1rem', marginBottom: '36px' }}>
+            Join thousands of Nigerians already using {appName} to manage their virtual funds.
+          </p>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <Link to="/signup" style={{
+              background: '#fff', color: '#4C5FD5', padding: '14px 36px',
+              borderRadius: '10px', fontWeight: 700, fontSize: '15px', textDecoration: 'none',
+            }}>Create Free Account</Link>
+            <Link to="/contact-us" style={{
+              background: 'rgba(255,255,255,0.15)', color: '#fff',
+              border: '1px solid rgba(255,255,255,0.3)',
+              padding: '14px 36px', borderRadius: '10px', fontWeight: 600,
+              fontSize: '15px', textDecoration: 'none',
+            }}>Contact Us</Link>
           </div>
-        </section>
+        </div>
+      </section>
 
-        
-        <section className="team section bg-white">
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <div className="section-title">
-                  
-                  <h2 className="wow fadeInUp" data-wow-delay=".4s">
-                    Our Team
-                  </h2>
-                  <p className="wow fadeInUp" data-wow-delay=".6s" style={{fontSize: 20, textAlign:'justify'}}>
-                  our success is a collective effort driven by a dynamic and skilled team members. Each member contributes unique talents and expertise, working together to shape our vision and redefine the landscape of virtual sales and eliminating the risk of losing values for their money.
-                  </p>
-                </div>
-                <p style={{fontSize: 20, textAlign:'justify'}}>Our passion meets expertise, and innovation merges with reliability. Together, we are committed to delivering a cutting-edge platform that empowers users in the realms of virtual funds and exchanges.</p>
-              </div>
-            </div>
-            {/* <div className="row">
-              <div
-                className="col-lg-3 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".3s"
-              >
-                <div className="single-team">
-                  <div className="team-image">
-                    <img src="assets/images/team/team4.jpg" alt="#" />
-                  </div>
-                  <div className="content">
-                    <h4>
-                      Deco Milan
-                      <span>Founder</span>
-                    </h4>
-                    <ul className="social">
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-facebook-filled"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-instagram"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-twitter-original"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-linkedin-original"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="col-lg-3 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".5s"
-              >
-                <div className="single-team">
-                  <div className="team-image">
-                    <img src="assets/images/team/team1.jpg" alt="#" />
-                  </div>
-                  <div className="content">
-                    <h4>
-                      Liza Marko
-                      <span>Developer</span>
-                    </h4>
-                    <ul className="social">
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-facebook-filled"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-instagram"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-twitter-original"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-linkedin-original"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="col-lg-3 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".7s"
-              >
-                <div className="single-team">
-                  <div className="team-image">
-                    <img src="assets/images/team/team2.jpg" alt="#" />
-                  </div>
-                  <div className="content">
-                    <h4>
-                      John Smith
-                      <span>Designer</span>
-                    </h4>
-                    <ul className="social">
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-facebook-filled"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-instagram"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-twitter-original"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-linkedin-original"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div
-                className="col-lg-3 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".9s"
-              >
-                <div className="single-team">
-                  <div className="team-image">
-                    <img src="assets/images/team/team3.jpg" alt="#" />
-                  </div>
-                  <div className="content">
-                    <h4>
-                      Amion Doe
-                      <span>Co-Founder</span>
-                    </h4>
-                    <ul className="social">
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-facebook-filled"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-instagram"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-twitter-original"></i>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="javascript:void(0)">
-                          <i className="lni lni-linkedin-original"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div> */}
-          </div>
-        </section>
-
-        <section className="testimonials style2 section">
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <div className="section-title">
-                  {/* <h3 className="wow zoomIn" data-wow-delay=".2s">
-                    Customer Reviews
-                  </h3> */}
-                  <h2 className="wow fadeInUp" data-wow-delay=".4s">
-                    Our Testimonials
-                  </h2>
-                  <p className="wow fadeInUp" data-wow-delay=".6s" style={{fontSize: 20, textAlign:'justify'}}>
-                      What users are saying about our services
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="row testimonial-slider">
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p style={{fontSize: 20, textAlign:'justify'}}>
-                        “Very impressive service delivery! they made my virtual funds sales a breeze. 
-                  Fast transactions and with excellent rates I'm satisfied using the platform for my virtual funds
-                  sales.”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-1.png"
-                        alt="#"
-                      />
-                        <h4 className="name">
-                          Silva
-                        <span className="deg">Online Coach</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p style={{fontSize: 20, textAlign:'justify'}}>
-                        “Top-notch service, it exceeded my expectations with 
-                        their professionalism and commitment to user satisfaction. 
-                        I sold my paypal funds on my own rates and I got my money within five minutes.”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-2.png"
-                        alt="#"
-                      />
-                      <h4 className="name">
-                        David
-                        <span className="deg">Freelancer (Web Developer)</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p style={{fontSize: 20, textAlign:'justify'}}>
-                        “Provides a user-friendly experience and a competitive rates. 
-                        Good customers support, reliability and swift transactions 
-                        delivery make them stand out in the market. <br/>Give it a try.”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-3.png"
-                        alt="#"
-                      />
-                      <h4 className="name">
-                        Sonia
-                        <span className="deg">Article Writer</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p style={{fontSize: 20, textAlign:'justify'}}>
-                        “Outstanding platform, consistently exceeds my expectations. 
-                        I deal with them regularly and their dedication to excellence service, competitive rates makes them my go-to for seamless and reliable transactions..”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-4.png"
-                        alt="#"
-                      />
-                      <h4 className="name">
-                        Mary J
-                        <span className="deg">Developer</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p style={{fontSize: 20, textAlign:'justify'}}>
-                        “They offers unparalleled reliability and professionalism. 
-                        Swift transactions, a high competitive rates and customer satisfaction set them apart.
-                        I will continue using the platform”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-5.png"
-                        alt="#"
-                      />
-                      <h4 className="name">
-                        Lola M
-                        <span className="deg">Data Analyst </span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-       <FooterNote/>
+      <FooterNote />
     </Fragment>
-    </>
   );
 };
 

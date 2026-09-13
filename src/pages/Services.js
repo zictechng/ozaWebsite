@@ -1,395 +1,164 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import MenuBar from '../component/Menu';
 import FooterNote from '../component/Footer';
-import { Link } from 'react-router-dom';
+import useAppInfo from '../component/useAppInfo';
 
 const Services = () => {
+  const { appName } = useAppInfo();
+
   useEffect(() => {
-    function fadeout() {
-        document.querySelector('.preloader').style.opacity = '0';
-        document.querySelector('.preloader').style.display = 'none';
-    }
-    const timeoutID = window.setTimeout(fadeout,() => {
-    }, 2000);
- 
-     return () => window.clearTimeout(timeoutID );
-}, [])
+    document.title = `Services — ${appName}`;
+    window.scrollTo(0, 0);
+  }, [appName]);
+
+  const services = [
+    {
+      icon: '📱', title: 'Airtime Top-up', color: '#EEF2FF', accent: '#4C5FD5',
+      features: ['MTN, Glo, Airtel and 9mobile', 'Below face value pricing', 'Instant delivery', 'Bulk top-up support'],
+      desc: 'Recharge any Nigerian network instantly from your wallet. Get airtime below face value with zero transaction fees.',
+    },
+    {
+      icon: '🌐', title: 'Data Bundles', color: '#DBEAFE', accent: '#3B82F6',
+      features: ['SME, gifting and corporate plans', 'Daily, weekly and monthly', 'All four major networks', 'Instant activation'],
+      desc: 'Buy data bundles at wholesale rates. SME, gifting and corporate plans for every network — activated the moment you pay.',
+    },
+    {
+      icon: '⚡', title: 'Electricity Bills', color: '#FEF3C7', accent: '#D97706',
+      features: ['All Nigerian DisCos supported', 'Prepaid and postpaid', 'Token recovery anytime', 'Instant token delivery'],
+      desc: 'Pay prepaid and postpaid electricity bills for every distribution company in Nigeria. Your token is saved permanently.',
+    },
+    {
+      icon: '📺', title: 'Cable TV Subscription', color: '#D1FAE5', accent: '#10B981',
+      features: ['DStv, GOtv and Startimes', 'Smartcard name verified', 'All packages available', 'Renewal and upgrade'],
+      desc: 'Renew or upgrade your decoder subscription. We verify your smartcard name before you pay so there are no mistakes.',
+    },
+    {
+      icon: '🎓', title: 'Exam Result Pins', color: '#FEE2E2', accent: '#EF4444',
+      features: ['WAEC, NECO, NABTEB, JAMB', 'Instant pin delivery', 'Saved to your dashboard', 'Bulk purchase supported'],
+      desc: 'Get WAEC, NECO, NABTEB and JAMB result checker pins delivered instantly to your dashboard — ready to print or share.',
+    },
+    {
+      icon: '💵', title: 'Sell PayPal Funds', color: '#EEF2FF', accent: '#4C5FD5',
+      features: ['Competitive exchange rates', 'Same-day Naira credit', 'Secure verification', 'All PayPal currencies'],
+      desc: 'Exchange your PayPal balance for Naira at the best competitive rates. Submit your proof, admin verifies, wallet credited.',
+    },
+    {
+      icon: '💳', title: 'Sell Payoneer Funds', color: '#EDE9FE', accent: '#7C3AED',
+      features: ['Market-based rates', 'Fast processing', 'Secure and verified', 'Direct wallet credit'],
+      desc: 'Convert your Payoneer earnings to Naira quickly and securely. Best rates with transparent processing.',
+    },
+    {
+      icon: '₿', title: 'Sell Bitcoin (BTC)', color: '#FEF3C7', accent: '#D97706',
+      features: ['Live market rates', 'Secure transaction', 'Fast Naira credit', 'All BTC amounts accepted'],
+      desc: 'Exchange your Bitcoin to Naira at transparent, live market-based rates. Quick, secure and fully tracked.',
+    },
+    {
+      icon: '🌍', title: 'Virtual Account Opening', color: '#D1FAE5', accent: '#10B981',
+      features: ['PayPal account creation', 'Payoneer account setup', 'Full verification support', 'Business accounts available'],
+      desc: 'Get foreign PayPal and Payoneer accounts opened and fully verified for you — individual and business accounts.',
+    },
+  ];
+
   return (
-    <>
-        <Fragment>
-        <div className="preloader">
-        <div className="preloader-inner">
-          <div className="preloader-icon">
-            <span></span>
-            <span></span>
-          </div>
-        </div>
-      </div>
-
+    <Fragment>
       <MenuBar />
-      <div className="breadcrumbs">
+
+      {/* Hero */}
+      <section style={{
+        background: 'linear-gradient(135deg, #0F1629 0%, #1a2547 100%)',
+        padding: '160px 0 80px', position: 'relative', overflow: 'hidden',
+      }}>
+        <div style={{
+          position: 'absolute', top: '-100px', right: '-100px', width: '500px', height: '500px',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(76,95,213,0.15) 0%, transparent 70%)',
+        }} />
+        <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
+          <div style={{
+            display: 'inline-block', background: 'rgba(76,95,213,0.2)', color: '#818cf8',
+            fontSize: '12px', fontWeight: 700, padding: '6px 16px',
+            borderRadius: '100px', marginBottom: '20px',
+          }}>OUR SERVICES</div>
+          <h1 style={{
+            fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, color: '#fff',
+            letterSpacing: '-0.02em', marginBottom: '20px',
+          }}>
+            Everything you need, one wallet
+          </h1>
+          <p style={{ color: '#94a3b8', fontSize: '1.1rem', lineHeight: 1.8, maxWidth: '560px', margin: '0 auto 36px' }}>
+            Direct provider integrations mean every order delivers in seconds — or refunds itself automatically. Nothing hangs.
+          </p>
+          <Link to="/signup" style={{
+            background: '#4C5FD5', color: '#fff', padding: '14px 36px',
+            borderRadius: '10px', fontWeight: 700, fontSize: '15px', textDecoration: 'none',
+          }}>Get Started Free</Link>
+        </div>
+      </section>
+
+      {/* Services grid */}
+      <section style={{ padding: '100px 0', background: '#F8FAFF' }}>
         <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-6 offset-lg-3 col-md-12 col-12">
-              <div className="breadcrumbs-content">
-                <h1 className="page-title">Services</h1>
-                <ul className="breadcrumb-nav">
-                  <li>
-                    <a href="/">Home</a>
-                  </li>
-                  <li>Our Services</li>
-                </ul>
+          <div className="row g-4">
+            {services.map((s, i) => (
+              <div key={i} className="col-lg-4 col-md-6 col-12">
+                <div style={{
+                  background: '#fff', borderRadius: '20px', padding: '32px',
+                  border: '1px solid #e8edf5', height: '100%', display: 'flex', flexDirection: 'column',
+                }}>
+                  <div style={{
+                    width: '60px', height: '60px', borderRadius: '14px',
+                    background: s.color, display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', fontSize: '28px', marginBottom: '20px',
+                  }}>{s.icon}</div>
+                  <h3 style={{ fontWeight: 800, color: '#1A1F36', fontSize: '1.1rem', marginBottom: '12px' }}>{s.title}</h3>
+                  <p style={{ color: '#718096', fontSize: '14px', lineHeight: 1.7, marginBottom: '24px', flexGrow: 1 }}>{s.desc}</p>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px' }}>
+                    {s.features.map((f, j) => (
+                      <li key={j} style={{
+                        display: 'flex', alignItems: 'center', gap: '8px',
+                        padding: '6px 0', borderBottom: j < s.features.length - 1 ? '1px solid #f1f5f9' : 'none',
+                        fontSize: '13px', color: '#4A5568',
+                      }}>
+                        <span style={{ color: s.accent, fontWeight: 700 }}>✓</span>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link to="/signup" style={{
+                    display: 'block', textAlign: 'center', padding: '11px',
+                    background: s.color, color: s.accent, borderRadius: '10px',
+                    fontWeight: 700, fontSize: '14px', textDecoration: 'none',
+                  }}>Get Started →</Link>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-        <section className="freatures section bg-white">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-5 col-12">
-                <div className="image wow fadeInLeft" data-wow-delay=".3s">
-                  <img src="assets/images/features/feature-img4.png" alt="#" />
-                </div>
-              </div>
-              <div className="col-lg-7 col-12">
-                <div className="content">
-                  <h3 className="heading wow fadeInUp" data-wow-delay=".5s">
-                    Buy, Sell and Swap Virtual Funds
-                    <br /> 
-                  </h3>
-
-                  <div className="single-feature wow fadeInUp" data-wow-delay=".6s">
-                    
-                    <h4>Buy Virtual Funds</h4>
-                    <p style={{fontSize: 20, textAlign:'justify'}}>
-                        Experience trust and security on our platform. Easily purchase virtual funds at low rates through our seamless platform, enjoy fast transactions and fast deposit with confidence
-                    </p>
-                  </div>
-
-                  <div className="single-feature wow fadeInUp" data-wow-delay=".7s">
-                    
-                    <h4>Sell Virtual Funds</h4>
-                    <p style={{fontSize: 20, textAlign:'justify'}}>
-                    Sell your virtual funds at a favorable rate <b>(your own rate)</b> and have your bank account credited instantly. Say goodbye to failed or low rate transactions.<br/>
-                    Your funds is your assets, stop wasting it on low rates.
-                    </p>
-                  </div>
-
-                  <div
-                    className="single-feature wow fadeInUp"
-                    data-wow-delay="0.8s">
-                    <h4>Pay utility Bills With Virtual Funds</h4>
-                    <p style={{fontSize: 20, textAlign:'justify'}}>
-                    You can now pay all your bills effortlessly using virtual funds. Streamline your payment process by utilizing digital currency for a convenient and efficient transaction
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-                  <p style={{fontSize: 20, textAlign:'justify'}}>
-                    You can now work online and earned in dollars, receive your money via <b>PayPal, Payoneer or Bitcoin</b> and sell them in high rates with us! No more hassle how to get value for your funds or sell your virtual funds, we got you covered.<br/>
-                    No more limitations to the extend of what you can earn, start remote job today and be rest assured you will get your value from your earning through our user-friendly, secured and competitive rate system.
-                  </p>
-          </div>
-        </section>
-
-        {/* <section className="testimonials style2 section">
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <div className="section-title">
-                  <h3 className="wow zoomIn" data-wow-delay=".2s">
-                    Customer Reviews
-                  </h3>
-                  <h2 className="wow fadeInUp" data-wow-delay=".4s">
-                    Our Testimonials
-                  </h2>
-                  <p className="wow fadeInUp" data-wow-delay=".6s">
-                    There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered alteration in some
-                    form.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="row testimonial-slider">
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p>
-                        “A vast number of clients decide to create dedicated
-                        software is the online store. It is nothing but a
-                        website with a catalog of products and the possibility.”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-1.png"
-                        alt="#"
-                      />
-                      <h4 className="name">
-                        Somalia D Silva
-                        <span className="deg">Business Manager</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p>
-                        “A vast number of clients decide to create dedicated
-                        software is the online store. It is nothing but a
-                        website with a catalog of products and the possibility.”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-2.png"
-                        alt="#"
-                      />
-                      <h4 className="name">
-                        David Warner
-                        <span className="deg">Web Developer</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p>
-                        “A vast number of clients decide to create dedicated
-                        software is the online store. It is nothing but a
-                        website with a catalog of products and the possibility.”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-3.png"
-                        alt="#"
-                      />
-                      <h4 className="name">
-                        Jems Gilario
-                        <span className="deg">Graphics Designer</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p>
-                        “A vast number of clients decide to create dedicated
-                        software is the online store. It is nothing but a
-                        website with a catalog of products and the possibility.”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-2.png"
-                        alt="#"
-                      />
-                      <h4 className="name">
-                        David Warner
-                        <span className="deg">Web Developer</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 col-12 ">
-                <div className="single-testimonial">
-                  <div className="inner-content">
-                    <div className="quote-icon">
-                      <i className="lni lni-quotation"></i>
-                    </div>
-                    <div className="text">
-                      <p>
-                        “A vast number of clients decide to create dedicated
-                        software is the online store. It is nothing but a
-                        website with a catalog of products and the possibility.”
-                      </p>
-                    </div>
-                    <div className="author">
-                      <img
-                        src="assets/images/testimonial/testi-3.png"
-                        alt="#"
-                      />
-                      <h4 className="name">
-                        Jems Gilario
-                        <span className="deg">Graphics Designer</span>
-                      </h4>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section> */}
-       
-       <div className="services section client-logo">
-          <div className="container">
-            <div className="row">
-              <div className="col-12">
-                <div className="section-title">
-                  
-                  <h2 className="wow fadeInUp" data-wow-delay=".4s">
-                    Our Services
-                  </h2>
-                  <p className="wow fadeInUp" data-wow-delay=".6s" style={{fontSize: 20, textAlign:'justify'}}>
-                    We offer a competitive solution tailored to your needs and there is no limit to what you can expect in our solution because, we keep adding new exciting and useful features to our solution on a regular basis.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div
-                className="col-lg-4 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".2s"
-              >
-                <div className="single-service">
-                  <div className="main-icon">
-                    <i className="lni lni-grid-alt"></i>
-                  </div>
-                  <h4 className="text-title">Exchange Virtual Funds</h4>
-                  <p style={{fontSize: 20, textAlign:'justify'}}>
-                    Easily exchange your virtual funds to your local currency with a high competitive
-                    rates and get your bank account credited within minutes.
-                  </p>
-                </div>
-              </div>
-              <div
-                className="col-lg-4 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".4s"
-              >
-                <div className="single-service">
-                  <div className="main-icon">
-                    <i className="lni lni-keyword-research"></i>
-                  </div>
-                  <h4 className="text-title">Request Paypal Account</h4>
-                  <p style={{fontSize: 20, textAlign:'justify'}}>
-                    We understand the pains of having a verified paypal account to receive funds. <br/>
-                    Request a <b> verified paypal account</b> and have your funds received.
-                  </p>
-                </div>
-              </div>
-              <div
-                className="col-lg-4 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".6s"
-              >
-                <div className="single-service">
-                  <div className="main-icon">
-                    <i className="lni lni-vector"></i>
-                  </div>
-                  <h4 className="text-title">Connect With Users</h4>
-                  <p style={{fontSize: 20, textAlign:'justify'}}>
-                    Connect with other users and you can easily send and receive funds from members users in the 
-                    platform, it takes seconds to receive your funds.
-                  </p>
-                </div>
-              </div>
-              <div
-                className="col-lg-4 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".2s"
-              >
-                <div className="single-service">
-                  <div className="main-icon">
-                    <i className="lni lni-book"></i>
-                  </div>
-                  <h4 className="text-title">Utility Bills Payment</h4>
-                  <p style={{fontSize: 20, textAlign:'justify'}}>
-                    It's easier, faster, convenient to do bill payment with virtual funds.
-                    <b> Airtime, Mobile Data, Cable Subscriptions, Electricity and more...</b>
-                  </p>
-                </div>
-              </div>
-              <div
-                className="col-lg-4 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".4s"
-              >
-                <div className="single-service">
-                  <div className="main-icon">
-                    <i className="lni lni-cloud-network"></i>
-                  </div>
-                  <h4 className="text-title">Buy Virtual Funds</h4>
-                  <p style={{fontSize: 20, textAlign:'justify'}}>
-                    You can easily purchase virtual funds at a very low rate in our platform as a member user and hold or use for utility bills payment or any transaction.
-                  </p>
-                </div>
-              </div>
-              <div
-                className="col-lg-4 col-md-6 col-12 wow fadeInUp"
-                data-wow-delay=".6s"
-              >
-                <div className="single-service">
-                  <div className="main-icon">
-                    <i className="lni lni-display-alt"></i>
-                  </div>
-                  <h4 className="text-title">Loan Saver</h4>
-                  <p style={{fontSize: 20, textAlign:'justify'}}>
-                    We provide easy loan facility to our loan saver users!<br/>Take advantage of this
-                    to scale up your business, you don't need any paper work. <Link to={'/contact-us'}> More details</Link>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+      {/* CTA */}
+      <section style={{
+        background: 'linear-gradient(135deg, #0F1629 0%, #1a2547 100%)',
+        padding: '80px 0', textAlign: 'center',
+      }}>
+        <div className="container">
+          <h2 style={{ color: '#fff', fontSize: '2rem', fontWeight: 800, marginBottom: '16px' }}>
+            One account. Every service.
+          </h2>
+          <p style={{ color: '#94a3b8', fontSize: '1rem', marginBottom: '36px' }}>
+            Create your free account and access all services from a single wallet.
+          </p>
+          <Link to="/signup" style={{
+            background: '#4C5FD5', color: '#fff', padding: '14px 40px',
+            borderRadius: '10px', fontWeight: 700, fontSize: '15px', textDecoration: 'none',
+          }}>Create Free Account</Link>
         </div>
+      </section>
 
-        <section className="call-action">
-          <div className="container">
-            <div className="inner-content">
-              <div className="row align-items-center">
-                <div className="col-lg-6 col-md-7 col-12">
-                  <div className="text">
-                    <h2>
-                      Download The App Now! 
-                      <br /> <p>Start a new experience.</p>
-                    </h2>
-                  </div>
-                </div>
-                <div className="col-lg-6 col-md-5 col-12">
-                  <div className="button">
-                    {/* <a href="#" className="btn">
-                      <i className="lni lni-apple"></i> App Store
-                    </a> */}
-                    <a href="https://play.google.com/store/apps/details?id=com.zictech.ozaapp" target="_new" rel="noreferrer" className="btn btn-alt">
-                      <i className="lni lni-play-store"></i> Google Play
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <FooterNote/>
-        </Fragment>
-    </>
+      <FooterNote />
+    </Fragment>
   );
-}
+};
 
 export default Services;

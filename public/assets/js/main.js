@@ -12,8 +12,10 @@ Author: GrayGrids
     })
 
     function fadeout() {
-        document.querySelector('.preloader').style.opacity = '0';
-        document.querySelector('.preloader').style.display = 'none';
+        var el = document.querySelector('.preloader');
+        if (!el) return;
+        el.style.opacity = '0';
+        el.style.display = 'none';
     }
 
 

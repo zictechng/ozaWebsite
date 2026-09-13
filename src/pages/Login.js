@@ -269,29 +269,39 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Success Modal */}
-      <Modal show={showModal} onHide={() => setShowModal(false)} centered backdrop="static" keyboard={false}>
-        <Modal.Header style={{ border: 'none', paddingBottom: 0 }}>
-          <div style={{ width: '100%', textAlign: 'center', paddingTop: '8px' }}>
-            <div style={{ fontSize: '48px', marginBottom: '8px' }}>✅</div>
-            <h5 style={{ fontWeight: 800, color: '#1A1F36', fontSize: '1.2rem' }}>Login Successful</h5>
+    {/* Success Modal */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header style={{ border: 'none', paddingBottom: 0 }} closeButton>
+          <div style={{ flex: 1, textAlign: 'center', paddingTop: '8px', paddingLeft: '24px' }}>
+            <h5 style={{ fontWeight: 800, color: '#1A1F36', fontSize: '1.1rem', margin: 0 }}>
+              Login Successful ✅
+            </h5>
           </div>
         </Modal.Header>
-        <Modal.Body style={{ textAlign: 'center', color: '#718096', fontSize: '15px', padding: '8px 32px 24px' }}>
-          You have successfully signed in. Access your account via the mobile app or the web portal.
+        <Modal.Body style={{ textAlign: 'center', padding: '16px 32px 8px' }}>
+          <p style={{ color: '#718096', fontSize: '15px', lineHeight: 1.8, marginBottom: '0' }}>
+            You are now signed in. How would you like to continue?
+          </p>
         </Modal.Body>
-        <Modal.Footer style={{ border: 'none', justifyContent: 'center', paddingBottom: '24px', gap: '12px' }}>
-          <button
-            onClick={() => setShowModal(false)}
+        <Modal.Footer style={{ border: 'none', justifyContent: 'center', paddingBottom: '28px', gap: '12px', flexDirection: 'column', padding: '16px 32px 28px' }}>
+          {/* Primary — Web Portal */}
+          <a href="http://localhost:3000"
             style={{
-              background: '#f1f5f9', border: 'none', borderRadius: '8px',
-              padding: '10px 24px', fontWeight: 600, cursor: 'pointer', color: '#718096',
-            }}>Close</button>
+              display: 'block', width: '100%', textAlign: 'center',
+              background: '#4C5FD5', color: '#fff', borderRadius: '10px',
+              padding: '13px', fontWeight: 700, fontSize: '15px',
+              textDecoration: 'none',
+            }}> 🌐 Open Web Dashboard
+          </a>
+          {/* Secondary — App */}
           <a href="/#" style={{
-            background: '#4C5FD5', color: '#fff', border: 'none',
-            borderRadius: '8px', padding: '10px 24px', fontWeight: 700,
-            textDecoration: 'none', fontSize: '14px',
-          }}>Download App</a>
+            display: 'block', width: '100%', textAlign: 'center',
+            background: '#F8FAFF', color: '#4C5FD5', borderRadius: '10px',
+            padding: '13px', fontWeight: 600, fontSize: '15px',
+            textDecoration: 'none', border: '1px solid #e2e8f0',
+          }}>
+            📱 Download Mobile App
+          </a>
         </Modal.Footer>
       </Modal>
     </Fragment>

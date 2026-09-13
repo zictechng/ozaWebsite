@@ -157,7 +157,7 @@ const Signup = () => {
             }}>
               Join thousands of<br />Nigerians already<br />
               <span style={{ color: 'rgba(255,255,255,0.6)', fontWeight: 400, fontSize: '1.3rem' }}>
-                making money work for them.
+                transacting smarter every day.
               </span>
             </h2>
 

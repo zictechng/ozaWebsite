@@ -1,228 +1,125 @@
-import React, { Fragment, useEffect, useState } from "react";
-import MenuBar from "../component/Menu";
-import FooterNote from "../component/Footer";
-import { useNavigate } from 'react-router-dom';
-
-import { Bounce, ToastContainer, toast } from 'react-toastify';
+import React, { Fragment, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import client from "../component/client";
-import Spinner from 'react-bootstrap/Spinner';
-import IsValidEmail from "../component/EmailValidation";
+import client from '../component/client';
+import IsValidEmail from '../component/EmailValidation';
+import useAppInfo from '../component/useAppInfo';
 
 const ForgetPassword = () => {
   const navigate = useNavigate();
-  const [userEmail, setUserEmail] = useState("");
+  const { appName, appLogo } = useAppInfo();
+  const [userEmail, setUserEmail] = useState('');
   const [showLoader, setShowLoader] = useState(false);
 
-
-     // process the data to backend api call
-     const authenticateEmail = async() => {
-      
-      if(userEmail.length < 1 || userEmail == undefined || userEmail == null){
-        toast.error('Please email address required', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-          });
-          return;
-        }
-        if(!IsValidEmail(userEmail)){
-          toast.error('Please enter valid email address', {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-            });
-            return;
-          }
-      setShowLoader(true)
-      const sendData ={
-        "user_email": userEmail,
-      }
-      //console.log("Sending...", sendData)
-      try {
-        const res = await client.post(`/api/forgetPasswordMobile`, sendData, {
-        })
-        if(res.data.msg ==='200'){
-          toast.success('Message sent successfully',
-              {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                transition: Bounce,
-                newestOnTop: false,
-                theme: "light",
-                });
-                setUserEmail("")
-            navigate('/reset-password', { state: {userEmailId: userEmail, otpCode: res.data.otpPin}, replace: true  } );
-            }
-          else if(res.data.status =='400'){
-            toast.error(res.data.message, {
-              position: "top-right",
-              autoClose: 3000,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "colored",
-              });
-            }
-            else if(res.data.status =='404'){
-              toast.error('Wrong details entered', {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                });
-              }
-              else if(res.data.status =='401'){
-                toast.error(res.data.message, {
-                  position: "top-right",
-                  autoClose: 3000,
-                  hideProgressBar: true,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  theme: "colored",
-                  });
-                }
-                else if(res.data.status =='500'){
-                  toast.error(res.data.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                    });
-                  }
-          } catch (error) {
-            console.log(error.message)
-          }
-          finally{
-            setShowLoader(false)
-           }
-    }
-
   useEffect(() => {
+    document.title = `Forgot Password — ${appName}`;
+  }, [appName]);
 
-    function fadeout() {
-        document.querySelector('.preloader').style.opacity = '0';
-        document.querySelector('.preloader').style.display = 'none';
+    const processForget = async () => {
+    if (!userEmail || userEmail.trim() === '') {
+      toast.error('Please enter your email address');
+      return;
     }
-    const timeoutID = window.setTimeout(fadeout,() => {
-    }, 2000);
- 
-     return () => window.clearTimeout(timeoutID );
-}, [])
+    if (!IsValidEmail(userEmail.trim())) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    setShowLoader(true);
+    try {
+      const res = await client.post('/api/forgetPasswordMobile', { email: userEmail });
+      if (res.data.msg === '200') {
+        navigate('/reset-password', { state: { userEmailId: userEmail, otpCode: res.data.otpPin }, replace: true });
+      } else {
+        toast.error(res.data.message || 'Email not found. Please check and try again.');
+      }
+    } catch {
+      toast.error('Connection error. Please try again.');
+    } finally {
+      setShowLoader(false);
+    }
+  };
+
   return (
-    <>
-      <Fragment>
-      <div className="preloader">
-        <div className="preloader-inner">
-          <div className="preloader-icon">
-            <span></span>
-            <span></span>
+    <Fragment>
+      <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+      <div style={{ minHeight: '100vh', background: '#F8FAFF', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
+        <div style={{ width: '100%', maxWidth: '420px' }}>
+
+          {/* Logo */}
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <Link to="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
+              {appLogo ? (
+                <img src={appLogo} alt={appName} style={{ height: '36px' }} />
+              ) : (
+                <div style={{
+                  width: '40px', height: '40px', borderRadius: '10px',
+                  background: 'linear-gradient(135deg, #4C5FD5, #6C63FF)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#fff', fontWeight: 800, fontSize: '18px',
+                }}>{appName?.charAt(0) || 'O'}</div>
+              )}
+              <span style={{ color: '#1A1F36', fontWeight: 800, fontSize: '20px' }}>{appName}</span>
+            </Link>
+          </div>
+
+          <div style={{
+            background: '#fff', borderRadius: '20px', padding: '40px',
+            border: '1px solid #e8edf5', boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+          }}>
+            <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+              <div style={{
+                width: '64px', height: '64px', borderRadius: '16px',
+                background: '#EEF2FF', display: 'flex', alignItems: 'center',
+                justifyContent: 'center', fontSize: '28px', margin: '0 auto 16px',
+              }}>🔑</div>
+              <h2 style={{ fontWeight: 800, color: '#1A1F36', fontSize: '1.5rem', marginBottom: '8px' }}>
+                Forgot your password?
+              </h2>
+              <p style={{ color: '#718096', fontSize: '14px', lineHeight: 1.7 }}>
+                Enter your registered email address and we will send you a reset code.
+              </p>
+            </div>
+
+            <div style={{ marginBottom: '20px' }}>
+              <label style={{ display: 'block', fontWeight: 600, color: '#1A1F36', fontSize: '14px', marginBottom: '8px' }}>
+                Email address
+              </label>
+              <input
+                type="email"
+                placeholder="you@example.com"
+                value={userEmail}
+                onChange={e => setUserEmail(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && processForget()}
+                style={{
+                  width: '100%', padding: '13px 16px', border: '1.5px solid #e2e8f0',
+                  borderRadius: '10px', fontSize: '15px', outline: 'none',
+                  color: '#1A1F36', background: '#fff', fontFamily: 'inherit',
+                }}
+              />
+            </div>
+
+            <button
+              onClick={processForget}
+              disabled={showLoader}
+              style={{
+                width: '100%', padding: '14px', background: '#4C5FD5',
+                color: '#fff', border: 'none', borderRadius: '10px',
+                fontWeight: 700, fontSize: '15px', cursor: 'pointer',
+                opacity: showLoader ? 0.8 : 1, fontFamily: 'inherit', marginBottom: '20px',
+              }}>
+              {showLoader ? 'Sending reset code...' : 'Send Reset Code'}
+            </button>
+
+            <div style={{ textAlign: 'center', paddingTop: '16px', borderTop: '1px solid #f1f5f9' }}>
+              <Link to="/login" style={{ color: '#4C5FD5', fontWeight: 600, fontSize: '14px', textDecoration: 'none' }}>
+                ← Back to sign in
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-        <MenuBar />
-        <ToastContainer/>
-        <div className="breadcrumbs">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-6 offset-lg-3 col-md-12 col-12">
-                <div className="breadcrumbs-content">
-                  <h1 className="page-title">Forget Password</h1>
-                  <ul className="breadcrumb-nav">
-                    <li>
-                      <a href="/">Home</a>
-                    </li>
-                    <li>Reset Password</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="account-login section">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-6 offset-lg-3 col-md-10 offset-md-1 col-12">
-                <form className="card login-form inner-content" onSubmit={e => e.preventDefault()}>
-                  <div className="card-body">
-                    <div className="title">
-                      <h3>Forget Password</h3>
-                      <p>
-                        Need to reset your password? No problem! Just enter your
-                        email & click the button below.
-                      </p>
-                    </div>
-                    <div className="input-head">
-                      <div className="form-group input-group">
-                        <label>
-                          <i className="lni lni-envelope"></i>
-                        </label>
-                        <input
-                          className="form-control"
-                          type="email"
-                          id="reg-email"
-                          placeholder="Enter your email"
-                          required
-                          value={userEmail}
-                          onChange={(e) => setUserEmail(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <div className="button" style={{marginTop: 20}}>
-                      <button className="btn"
-                      onClick={() => authenticateEmail()}>
-                        {showLoader ? <>
-                        <Spinner
-                        as="span"
-                        animation="border"
-                        size="sm"
-                        role="status"
-                        aria-hidden="true"
-                          />{" "}
-                          Authenticating...
-                      </> : 'Authenticate Email'}
-                      </button>
-                    </div>
-                    <h4 className="create-account">
-                      I remember my password <a href="/">Click here</a>
-                    </h4>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <FooterNote />
-      </Fragment>
-    </>
+    </Fragment>
   );
 };
 

@@ -5222,3 +5222,13 @@ blockquote span {
     width: 100%;
     z-index: 100;
   }
+
+/* Newsletter input placeholder */
+.newsletter-input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+.newsletter-input {
+  color: #fff !important;
+}
+
+
