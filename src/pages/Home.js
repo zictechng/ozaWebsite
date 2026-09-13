@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import MenuBar from '../component/Menu';
 import FooterNote from '../component/Footer';
+import useAppInfo from '../component/useAppInfo';
 
 // ── Animated counter hook
 const useCounter = (target, duration = 2000) => {
@@ -24,7 +26,7 @@ const useCounter = (target, duration = 2000) => {
 
 const Home = () => {
   const location = useLocation();
-  const appName = JSON.parse(localStorage.getItem('CompanyName') || '"Ota Mobile"');
+  const { appName } = useAppInfo();
 
   useEffect(() => {
     function fadeout() {
@@ -135,7 +137,7 @@ const Home = () => {
 
               {/* App store buttons */}
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '48px' }}>
-                <a href="#" style={{
+                <a href="/#" style={{
                   display: 'flex', alignItems: 'center', gap: '10px',
                   background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
                   borderRadius: '10px', padding: '10px 20px', textDecoration: 'none', color: '#fff',
@@ -146,7 +148,7 @@ const Home = () => {
                     <div style={{ fontSize: '14px', fontWeight: 700 }}>Google Play</div>
                   </div>
                 </a>
-                <a href="#" style={{
+                <a href="/#" style={{
                   display: 'flex', alignItems: 'center', gap: '10px',
                   background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
                   borderRadius: '10px', padding: '10px 20px', textDecoration: 'none', color: '#fff',
@@ -533,7 +535,7 @@ const Home = () => {
                 }}>
                   Create Free Account
                 </a>
-                <a href="#" style={{
+                <a href="/#" style={{
                   display: 'flex', alignItems: 'center', gap: '8px',
                   background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)',
                   borderRadius: '10px', padding: '14px 24px', textDecoration: 'none', color: '#fff', fontWeight: 600,

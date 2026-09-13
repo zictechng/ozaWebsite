@@ -1,68 +1,72 @@
 import React, { useEffect, useState } from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import client from './component/client';
 import RouterPage from './route/RouterPage';
 
 function App() {
-  const [showLoader, setShowLoader] = useState(false);
-  // function to get company details
-  
-  const getCompanyDetails = async() => {
-    setShowLoader(true);
+  const [appName, setAppName] = useState('');
+
+  const getCompanyDetails = async () => {
     try {
-      const res = await client.get(`/api/company_name`, {
-      })
-      //console.log(res.data)
-      if(res.data){
-        //console.log(res.data)
-        localStorage.setItem("CompanyName", JSON.stringify(res.data.app_name));
-        localStorage.setItem("CompanyBaseUrl", JSON.stringify(res.data.app_baseurl));
-        localStorage.setItem("CompanyShortInfo", JSON.stringify(res.data.app_short_name));
-        localStorage.setItem("CompanyAppTitle", JSON.stringify(res.data.app_launch_title));
+      const res = await client.get('/api/company_name');
+      if (res.data) {
+        const name = res.data.app_name || 'Ota Mobile';
+        const logo = res.data.app_logo || '';
+        const baseUrl = res.data.app_baseurl || '';
+        const shortInfo = res.data.app_short_name || '';
+        const launchTitle = res.data.app_launch_title || '';
+        const appEmail = res.data.app_email || '';
+
+        // Store all in localStorage
+        localStorage.setItem('CompanyName', JSON.stringify(name));
+        localStorage.setItem('CompanyLogo', JSON.stringify(logo));
+        localStorage.setItem('CompanyBaseUrl', JSON.stringify(baseUrl));
+        localStorage.setItem('CompanyShortInfo', JSON.stringify(shortInfo));
+        localStorage.setItem('CompanyAppTitle', JSON.stringify(launchTitle));
+        localStorage.setItem('CompanyEmail', JSON.stringify(appEmail));
+
+        // Update document title dynamically
+        document.title = `${name} — Your friendly virtual funds partner`;
+
+        // Update meta description
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+          metaDesc.setAttribute('content',
+            `${name} — The most reliable platform to sell PayPal, Payoneer and Bitcoin, buy airtime, data, pay bills and more in Nigeria.`
+          );
         }
-        
-        } catch (error) {
-          console.log(error.message)
-        }
-        finally{
-          setShowLoader(false)
-         }
-  }
+
+        setAppName(name);
+      }
+    } catch (error) {
+      console.log('Company details error:', error.message);
+      // Fallback to localStorage if API fails
+      const cached = localStorage.getItem('CompanyName');
+      if (cached) {
+        const name = JSON.parse(cached);
+        document.title = `${name} — Your friendly virtual funds partner`;
+        setAppName(name);
+      }
+    }
+  };
 
   useEffect(() => {
     getCompanyDetails();
 
     function fadeout() {
-        document.querySelector('.preloader').style.opacity = '0';
-        document.querySelector('.preloader').style.display = 'none';
+      const el = document.querySelector('.preloader');
+      if (el) {
+        el.style.opacity = '0';
+        el.style.display = 'none';
+      }
     }
-    const timeoutID = window.setTimeout(fadeout,() => {
-    }, 2000);
- 
-     return () => window.clearTimeout(timeoutID );
-}, [])
+    const timeoutID = window.setTimeout(fadeout, 2000);
+    return () => window.clearTimeout(timeoutID);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="App">
-      {/* This is traditional single way of routing... */}
-      {/* <Router>
-        <Routes>
-          <Route path='/' Component={Home}/>
-          <Route path='/about-us' Component={About} />
-          <Route path='/services' Component={Services} />
-          <Route path='/signup' Component={Signup} />
-          <Route path='/contact-us' Component={Contact} />
-          <Route path='/privacy-policy' Component={UserPrivacyPolicy} />
-          <Route path='/terms-and-conditions' Component={TermsCondition} />
-          <Route path='/verify-account' Component={VerifyAccount} />
-          <Route path='/forget-password' Component={ForgetPassword} />
-          <Route path='/reset-password' Component={ResetPassword} />
-        </Routes>
-      </Router> */}
-
-      {/* Here we use functional/model way to organized our routing system in the application */}
-        <RouterPage />
+      <RouterPage appName={appName} />
     </div>
   );
 }

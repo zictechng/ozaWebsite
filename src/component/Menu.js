@@ -1,10 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import useAppInfo from './useAppInfo';
 
 const MenuBar = () => {
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-  const appName = JSON.parse(localStorage.getItem('CompanyName') || '"Ota Mobile"');
+  const { appName, appLogo } = useAppInfo();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -29,17 +30,26 @@ const MenuBar = () => {
         <div className="container">
           <nav className="navbar navbar-expand-lg" style={{ padding: 0 }}>
             {/* Logo */}
-            <Link to="/" style={{
+          <Link to="/" style={{
               textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px',
             }}>
-              <div style={{
-                width: '36px', height: '36px', borderRadius: '8px',
-                background: 'linear-gradient(135deg, #4C5FD5, #6C63FF)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#fff', fontWeight: 800, fontSize: '16px',
-              }}>
-                {appName?.charAt(0) || 'O'}
-              </div>
+              {appLogo ? (
+                <img
+                  src={appLogo}
+                  alt={appName}
+                  style={{ height: '36px', width: 'auto', objectFit: 'contain' }}
+                  onError={e => { e.target.style.display = 'none'; }}
+                />
+              ) : (
+                <div style={{
+                  width: '36px', height: '36px', borderRadius: '8px',
+                  background: 'linear-gradient(135deg, #4C5FD5, #6C63FF)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  color: '#fff', fontWeight: 800, fontSize: '16px',
+                }}>
+                  {appName?.charAt(0) || 'O'}
+                </div>
+              )}
               <span style={{ color: '#fff', fontWeight: 800, fontSize: '18px' }}>{appName}</span>
             </Link>
 

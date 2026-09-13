@@ -22,15 +22,16 @@ Author: GrayGrids
     ======================================= */
     window.onscroll = function () {
         var header_navbar = document.querySelector(".navbar-area");
+        if (!header_navbar) return;
         var sticky = header_navbar.offsetTop;
 
         var logo = document.querySelector('.navbar-brand img')
         if (window.pageYOffset > sticky) {
           header_navbar.classList.add("sticky");
-          logo.src = 'assets/images/logo/logo.svg';
+          if (logo) logo.src = 'assets/images/logo/logo.svg';
         } else {
           header_navbar.classList.remove("sticky");
-          logo.src = 'assets/images/logo/white-logo.svg';
+          if (logo) logo.src = 'assets/images/logo/white-logo.svg';
         }
 
         if (window.pageYOffset > sticky) {
