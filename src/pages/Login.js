@@ -35,8 +35,9 @@ const Login = () => {
         password: userPassword,
       });
       if (res.data.msg === '200') {
-        // Store auth data so user portal can read it
-        localStorage.setItem('authUserData', JSON.stringify(res.data));
+        // Store token for user portal auto-login
+        sessionStorage.setItem('ota_sso_token', res.data.token);
+        sessionStorage.setItem('ota_sso_user', JSON.stringify(res.data));
         setUserEmail('');
         setUserPassword('');
         setShowModal(true);

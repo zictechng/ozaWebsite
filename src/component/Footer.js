@@ -18,7 +18,7 @@ const FooterNote = () => {
     }
     setNewsletterLoading(true);
     try {
-      const res = await client.post('/api/newsletter_subscriptions', { newsletter_subscriptions: newsletter });
+      const res = await client.post('/api/newsletter_subscriptions', { userEmail: newsletter });
       if (res.data.msg === '200') {
         setNewsletterMsg('Thank you for subscribing! You will receive updates from us.');
         setNewsletter('');
@@ -80,7 +80,7 @@ const FooterNote = () => {
                   </button>
                 </div>
                 {newsletterMsg && (
-                  <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '13px', marginTop: '8px' }}>
+                  <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '18px', marginTop: '8px' }}>
                     {newsletterMsg}
                   </p>
                 )}
