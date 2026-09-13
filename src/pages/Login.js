@@ -36,9 +36,9 @@ const Login = () => {
         password: userPassword,
       });
       if (res.data.msg === '200') {
-        // Encode the full API response as a base64 URL param — same shape Redux expects
-        const ssoPayload = btoa(JSON.stringify(res.data));
-        setSsoToken(ssoPayload);       // store for use in modal button
+        const encoded = btoa(JSON.stringify(res.data));
+        setSsoToken(encoded);
+
         setUserEmail('');
         setUserPassword('');
         setShowModal(true);
