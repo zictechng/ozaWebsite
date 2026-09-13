@@ -36,8 +36,10 @@ const Login = () => {
       });
       if (res.data.msg === '200') {
         // Store token for user portal auto-login
-        sessionStorage.setItem('ota_sso_token', res.data.token);
-        sessionStorage.setItem('ota_sso_user', JSON.stringify(res.data));
+        sessionStorage.setItem('ota_sso_credentials', JSON.stringify({
+          username: userEmail,
+          password: userPassword,
+        }));
         setUserEmail('');
         setUserPassword('');
         setShowModal(true);
