@@ -289,7 +289,7 @@ const Login = () => {
         </Modal.Body>
         <Modal.Footer style={{ border: 'none', justifyContent: 'center', paddingBottom: '28px', gap: '12px', flexDirection: 'column', padding: '16px 32px 28px' }}>
           {/* Primary — Web Portal */}
-          <a href={`${process.env.REACT_APP_PORTAL_URL || 'http://localhost:3000'}/auth/sign-in?sso=${ssoToken}`}
+          <a href={`${process.env.REACT_APP_PORTAL_URL || 'http://localhost:3000'}/?sso=${ssoToken}`}
             style={{
               display: 'block', width: '100%', textAlign: 'center',
               background: '#4C5FD5', color: '#fff', borderRadius: '10px',
