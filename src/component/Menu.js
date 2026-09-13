@@ -1,91 +1,106 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { useLocation } from "react-router-dom"
+import React, { Fragment, useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const MenuBar = () => {
-const location = useLocation();
+  const location = useLocation();
+  const [scrolled, setScrolled] = useState(false);
+  const appName = JSON.parse(localStorage.getItem('CompanyName') || '"Ota Mobile"');
 
-  //console.log("Current Route: ", location.pathname);
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const isHome = location.pathname === '/';
 
   return (
     <Fragment>
-        <header className="header navbar-area">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-12">
-                <div className="nav-inner">
-                  <nav className="navbar navbar-expand-lg">
-                    <a className="navbar-brand" href="/">
-                      <img src="assets/images/logo/white-logo.svg" alt="Logo" />
-                    </a>
-                    <button
-                      className="navbar-toggler mobile-menu-btn"
-                      type="button"
-                      data-bs-toggle="collapse"
-                      data-bs-target="#navbarSupportedContent"
-                      aria-controls="navbarSupportedContent"
-                      aria-expanded="false"
-                      aria-label="Toggle navigation">
-                        
-                      <span className="toggler-icon"></span>
-                      <span className="toggler-icon"></span>
-                      <span className="toggler-icon"></span>
-                    </button>
-                    <div
-                      className="collapse navbar-collapse sub-menu-bar"
-                      id="navbarSupportedContent"
-                    >
-                      <ul id="nav" className="navbar-nav ms-auto">
-                        <li className="nav-item">
-                            {/* <Link to="/" >Home</Link> */}
-                          <a
-                            href="/"
-                            className={location.pathname =='/'? 'active': ''}
-                            aria-label="Toggle navigation">
-                            Home
-                          </a>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/about-us" className={location.pathname =='/about-us'? 'active': ''}>About</Link>
-                        </li>
-                        
-                        <li className="nav-item">
-                          <Link to="/services" className={location.pathname =='/services'? 'active': ''}>
-                            Services
-                          </Link>
-                        </li>
-                        <li className="nav-item">
-                         <Link to="/contact-us" className={location.pathname =='/contact-us'? 'active': ''}>Contact Us</Link>
-                        </li>
-                        
-                      </ul>
-                    </div>
-                    <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      gap: "20px",      // space between buttons
-                      marginTop: "20px" // optional spacing from elements above
-                    }}
-                  >
-                    <div className="button home-btn">
-                      <Link to="/login" className="btn">Login</Link>
-                     
-                    </div>
-                    <div className="button home-btn">
-                      <Link to="/signup" className="btn">Open an account</Link>
-                     
-                    </div>
-                    </div>
-                    
-                  </nav>
-                </div>
+      <header style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+        transition: 'all 0.3s ease',
+        background: scrolled || !isHome
+          ? 'rgba(15, 22, 41, 0.97)'
+          : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : 'none',
+        padding: scrolled ? '12px 0' : '20px 0',
+      }}>
+        <div className="container">
+          <nav className="navbar navbar-expand-lg" style={{ padding: 0 }}>
+            {/* Logo */}
+            <Link to="/" style={{
+              textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px',
+            }}>
+              <div style={{
+                width: '36px', height: '36px', borderRadius: '8px',
+                background: 'linear-gradient(135deg, #4C5FD5, #6C63FF)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#fff', fontWeight: 800, fontSize: '16px',
+              }}>
+                {appName?.charAt(0) || 'O'}
+              </div>
+              <span style={{ color: '#fff', fontWeight: 800, fontSize: '18px' }}>{appName}</span>
+            </Link>
+
+            {/* Mobile toggle */}
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navMain"
+              style={{ border: '1px solid rgba(255,255,255,0.2)', padding: '6px 10px' }}>
+              <span style={{ display: 'block', width: '22px', height: '2px', background: '#fff', marginBottom: '4px' }} />
+              <span style={{ display: 'block', width: '22px', height: '2px', background: '#fff', marginBottom: '4px' }} />
+              <span style={{ display: 'block', width: '22px', height: '2px', background: '#fff' }} />
+            </button>
+
+            <div className="collapse navbar-collapse" id="navMain">
+              {/* Nav links */}
+              <ul className="navbar-nav ms-auto align-items-center" style={{ gap: '4px' }}>
+                {[
+                  { label: 'Home', path: '/' },
+                  { label: 'Services', path: '/services' },
+                  { label: 'About', path: '/about-us' },
+                  { label: 'Contact', path: '/contact-us' },
+                ].map(link => (
+                  <li key={link.path} className="nav-item">
+                    <Link to={link.path} style={{
+                      color: location.pathname === link.path ? '#fff' : 'rgba(255,255,255,0.65)',
+                      fontWeight: location.pathname === link.path ? 700 : 500,
+                      fontSize: '14px', textDecoration: 'none',
+                      padding: '8px 14px', display: 'block', borderRadius: '8px',
+                      background: location.pathname === link.path ? 'rgba(76,95,213,0.2)' : 'transparent',
+                      transition: 'all 0.2s',
+                    }}>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Auth buttons */}
+              <div style={{ display: 'flex', gap: '10px', marginLeft: '20px', alignItems: 'center' }}>
+                <Link to="/login" style={{
+                  color: 'rgba(255,255,255,0.8)', fontWeight: 600,
+                  fontSize: '14px', textDecoration: 'none', padding: '8px 16px',
+                }}>
+                  Sign in
+                </Link>
+                <Link to="/signup" style={{
+                  background: '#4C5FD5', color: '#fff', fontWeight: 700,
+                  fontSize: '14px', textDecoration: 'none', padding: '9px 20px',
+                  borderRadius: '8px', display: 'block',
+                }}>
+                  Get started
+                </Link>
               </div>
             </div>
-          </div>
-        </header>
+          </nav>
+        </div>
+      </header>
     </Fragment>
   );
-}
+};
 
 export default MenuBar;
