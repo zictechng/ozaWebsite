@@ -330,7 +330,7 @@ const Login = () => {
           <button
             onClick={() => {
                 const portalUrl = process.env.REACT_APP_PORTAL_URL || 'http://localhost:3000';
-                const win = window.open(`${portalUrl}/auth/sign-in?sso=pending`, '_blank');
+                const win = window.open(`${portalUrl}/auth/sign-in?sso=validating`, '_blank');
 
                 const send = setInterval(() => {
                   if (win.closed) { clearInterval(send); return; }
