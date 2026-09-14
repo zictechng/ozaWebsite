@@ -7,12 +7,13 @@ import Modal from 'react-bootstrap/Modal';
 import client from '../component/client';
 import IsValidEmail from '../component/EmailValidation';
 import useAppInfo from '../component/useAppInfo';
+import useAppStatus from '../component/useAppStatus';
 
 const Login = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { appName, appLogo } = useAppInfo();
-
+  const { platformDown, loginBlocked, message } = useAppStatus();
   const [userEmail, setUserEmail] = useState(state?.userEmailId || '');
   const [userPassword, setUserPassword] = useState('');
   const [showLoader, setShowLoader] = useState(false);
@@ -63,6 +64,7 @@ const Login = () => {
     background: '#fff', transition: 'border-color 0.2s',
     fontFamily: 'inherit',
   };
+
 
   return (
     <Fragment>
@@ -164,6 +166,32 @@ const Login = () => {
             <span style={{ color: '#1A1F36', fontWeight: 800, fontSize: '18px' }}>{appName}</span>
           </Link>
 
+          {platformDown || loginBlocked ? (
+          <div style={{
+            textAlign: 'center',
+            padding: '40px 24px',
+            background: platformDown ? '#FFF7ED' : '#FFF5F5',
+            borderRadius: '16px',
+            border: `1px solid ${platformDown ? '#FED7AA' : '#FED7D7'}`,
+          }}>
+            <div style={{ fontSize: '48px', marginBottom: '12px' }}>
+              {platformDown ? '🔧' : '🔒'}
+            </div>
+            <h3 style={{
+              fontWeight: 800, fontSize: '18px', marginBottom: '8px',
+              color: platformDown ? '#9A3412' : '#C53030',
+            }}>
+              {platformDown ? "We'll be right back" : 'Login Temporarily Unavailable'}
+            </h3>
+            <p style={{ color: '#718096', fontSize: '18px', lineHeight: 1.6, margin: 0 }}>
+              {message || (platformDown
+                ? 'The platform is under maintenance. Please check back shortly.'
+                : 'Login is currently disabled. Please try again later.')}
+            </p>
+          </div>
+        ) : (
+          <>
+          {/* Login form */}
           <div style={{ width: '100%', maxWidth: '420px' }}>
             <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#1A1F36', marginBottom: '8px', letterSpacing: '-0.02em' }}>
               Sign in to your account
@@ -270,6 +298,16 @@ const Login = () => {
               }}>Download</a>
             </div>
           </div>
+          </>
+        )}
+        {loginBlocked &&
+          <p style={{ color: '#718096', fontSize: '15px', marginBottom: '36px', marginTop: '15px' }}>
+              Don't have an account?{' '}
+              <Link to="/signup" style={{ color: '#4C5FD5', fontWeight: 600, textDecoration: 'none' }}>
+                Create one free
+              </Link>
+          </p>
+          }
         </div>
       </div>
 

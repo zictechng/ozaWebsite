@@ -9,11 +9,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import client from '../component/client';
 import IsValidEmail from '../component/EmailValidation';
 import useAppInfo from '../component/useAppInfo';
+import useAppStatus from '../component/useAppStatus';
 
 const Signup = () => {
   const navigate = useNavigate();
   const { appName, appLogo } = useAppInfo();
-
+  const { platformDown, signupBlocked, message } = useAppStatus();
   const [fullName, setFullName] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userEmail, setUserEmail] = useState('');
@@ -112,6 +113,7 @@ const Signup = () => {
     fontSize: '14px', marginBottom: '8px',
   };
 
+
   return (
     <Fragment>
       <ToastContainer position="top-right" autoClose={3000} theme="colored" />
@@ -209,6 +211,31 @@ const Signup = () => {
             <span style={{ color: '#1A1F36', fontWeight: 800, fontSize: '18px' }}>{appName}</span>
           </Link>
 
+          {platformDown || signupBlocked ? (
+          <div style={{
+            textAlign: 'center',
+            padding: '40px 24px',
+            background: platformDown ? '#FFF7ED' : '#FFF5F5',
+            borderRadius: '16px',
+            border: `1px solid ${platformDown ? '#FED7AA' : '#FED7D7'}`,
+          }}>
+            <div style={{ fontSize: '48px', marginBottom: '12px' }}>
+              {platformDown ? '🔧' : '🚫'}
+            </div>
+            <h3 style={{
+              fontWeight: 800, fontSize: '18px', marginBottom: '8px',
+              color: platformDown ? '#9A3412' : '#C53030',
+            }}>
+              {platformDown ? "We'll be right back" : 'Signup Temporarily Unavailable'}
+            </h3>
+            <p style={{ color:'#718096', maxWidth:'380px' }}>
+            {message || (platformDown
+              ? 'The platform is under maintenance. Please check back shortly.'
+              : 'New registrations are temporarily paused. Please check back soon.')}
+          </p>
+          </div>
+        ) : (
+          <>
           <div style={{ width: '100%', maxWidth: '440px' }}>
             <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#1A1F36', marginBottom: '6px', letterSpacing: '-0.02em' }}>
               Create your free account
@@ -315,7 +342,6 @@ const Signup = () => {
             {/* ── STEP 2 ── */}
             {step === 2 && (
               <>
-                
                 {/* Password */}
                 <div style={{ marginBottom: '18px' }}>
                   <label style={labelStyle}>Password</label>
@@ -370,6 +396,15 @@ const Signup = () => {
               </>
             )}
           </div>
+          </>
+        )}
+        {signupBlocked &&
+        <p style={{ color: '#718096', fontSize: '15px', marginBottom: '28px', marginTop: '15px' }}>
+              Already have an account?{' '}
+              <Link to="/login" style={{ color: '#4C5FD5', fontWeight: 600, textDecoration: 'none' }}>Sign in</Link>
+        </p>
+        }
+
         </div>
       </div>
 
